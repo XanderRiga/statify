@@ -1,8 +1,8 @@
 # frozen_string_literal: true
-
 require_relative 'boot'
-
 require 'rails/all'
+
+RSpotify::authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require_relative 'boot'
 require 'rails/all'
+require 'rspotify'
 
 RSpotify::authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
 

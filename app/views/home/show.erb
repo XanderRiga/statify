@@ -1,65 +1,80 @@
-<div class="columns">
-  <div class="column">
-    <h3 class="subtitle">Top Songs the Month</h3>
-    <table class="table is-striped is-hoverable">
-      <thead>
-      <tr>
-        <th>Title</th>
-        <th>Artist</th>
-        <th>Album</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @spotify_user.top_tracks(time_range: 'short_term').each do |track| %>
-        <tr>
-          <td><%= track.name %></td>
-          <td><%= track.artists.first.name %></td>
-          <td><%= track.album.name %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+<div class="tile is-ancestor">
+  <div class="tile is-parent is-2 has-text-centered is-vertical">
+    <article class="tile is-child notification is-success">
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <p class="title"><%= @spotify_user.display_name %></p>
+          <figure class="image is-square">
+            <a href="<%= @spotify_user.external_urls['spotify'] %>">
+              <img src="<%= @spotify_user.images.first['url'] %>">
+            </a>
+          </figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="tile is-child notification is-success">
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <p class="title">Followers:</p>
+          <p class="subtitle is-1"><%= @spotify_user.followers['total'] %></p>
+        </div>
+      </div>
+    </article>
   </div>
-  <div class="column">
-    <h3 class="subtitle">Top Songs the last 6 Months</h3>
-    <table class="table is-striped is-hoverable">
-      <thead>
-      <tr>
-        <th>Title</th>
-        <th>Artist</th>
-        <th>Album</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @spotify_user.top_tracks(time_range: 'medium_term').each do |track| %>
-        <tr>
-          <td><%= track.name %></td>
-          <td><%= track.artists.first.name %></td>
-          <td><%= track.album.name %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+
+  <div class="tile is-parent is-3 has-text-centered">
+    <article class="tile is-child notification is-info">
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <p class="title">Top Songs this Month</p>
+          <table class="table is-striped is-hoverable">
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Artist</th>
+              <th>Album</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @spotify_user.top_tracks(time_range: 'short_term', limit: 10).each do |track| %>
+              <tr>
+                <td><%= track.name %></td>
+                <td><%= track.artists.first.name %></td>
+                <td><%= track.album.name %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
   </div>
-  <div class="column">
-    <h3 class="subtitle">Top Songs of All Time</h3>
-    <table class="table is-striped is-hoverable">
-      <thead>
-      <tr>
-        <th>Title</th>
-        <th>Artist</th>
-        <th>Album</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @spotify_user.top_tracks(time_range: 'long_term').each do |track| %>
-        <tr>
-          <td><%= track.name %></td>
-          <td><%= track.artists.first.name %></td>
-          <td><%= track.album.name %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+  <div class="tile is-parent is-3 has-text-centered">
+    <article class="tile is-child notification is-primary">
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <p class="title">Recently Played</p>
+          <table class="table is-striped is-hoverable">
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Artist</th>
+              <th>Album</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @spotify_user.recently_played(limit: 10).each do |track| %>
+              <tr>
+                <td><%= track.name %></td>
+                <td><%= track.artists.first.name %></td>
+                <td><%= track.album.name %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
   </div>
 </div>

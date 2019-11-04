@@ -40,7 +40,9 @@
             <% @spotify_user.top_tracks(time_range: 'short_term', limit: 10).each do |track| %>
               <tr>
                 <td><%= track.name %></td>
-                <td><%= track.artists.first.name %></td>
+                <td>
+                  <%= link_to track.artists.first.name, controller: 'spotify', action: 'artist', id: track.artists.first.id %>
+                </td>
                 <td><%= track.album.name %></td>
               </tr>
             <% end %>
@@ -67,7 +69,9 @@
             <% @spotify_user.recently_played(limit: 10).each do |track| %>
               <tr>
                 <td><%= track.name %></td>
-                <td><%= track.artists.first.name %></td>
+                <td>
+                  <%= link_to track.artists.first.name, controller: 'spotify', action: 'artist', id: track.artists.first.id %>
+                </td>
                 <td><%= track.album.name %></td>
               </tr>
             <% end %>

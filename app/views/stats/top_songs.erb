@@ -13,7 +13,11 @@
       <% @spotify_user.top_tracks(time_range: 'short_term').each do |track| %>
         <tr>
           <td><%= track.name %></td>
-          <td><%= track.artists.first.name %></td>
+          <td>
+            <a href="<%=  %>">
+              <%= track.artists.first.name %>
+            </a>
+          </td>
           <td><%= track.album.name %></td>
         </tr>
       <% end %>

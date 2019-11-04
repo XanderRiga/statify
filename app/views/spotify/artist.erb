@@ -1,0 +1,44 @@
+<div class="tile is-ancestor">
+  <div class="tile is-parent is-2 has-text-centered is-vertical">
+    <article class="tile is-child notification is-success">
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <p class="title"><%= @artist.name %></p>
+          <figure class="image is-square">
+            <img src="<%= @artist.images.first['url'] %>">
+          </figure>
+        </div>
+      </div>
+    </article>
+    <article class="tile is-child notification is-success">
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <p class="title">Popularity:</p>
+          <p class="subtitle is-1"><%= @artist.popularity %></p>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="tile is-parent is-2 has-text-centered">
+    <article class="tile is-child notification is-info">
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <p class="title">Genres</p>
+          <table class="table is-striped is-hoverable">
+            <tbody>
+              <% @artist.genres.each do |genre| %>
+                <tr>
+                  <td>
+                    <a>
+                      <%= genre %>
+                    </a>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>

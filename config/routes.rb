@@ -8,4 +8,10 @@ Rails.application.routes.draw do
   resources :users
   resources :home, only: [:index, :show]
   get 'landing_page', to: 'home#show'
+
+  resources :spotify do
+    member do
+      get 'artist'
+    end
+  end
 end

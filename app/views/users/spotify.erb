@@ -1,1 +1,21 @@
-<h1>You are now logged in :D</h1>
+<h1 class="title">Statify</h1>
+<br>
+<h3 class="subtitle">Top Songs the Month</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Artist</th>
+      <th>Album</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @spotify_user.top_tracks(time_range: 'short_term').each do |track| %>
+      <tr>
+        <td><%= track.name %></td>
+        <td><%= track.artists.first.name %></td>
+        <td><%= track.album.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

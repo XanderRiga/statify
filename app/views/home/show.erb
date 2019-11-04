@@ -2,22 +2,44 @@
   Statify
 </h1>
 <br>
-<h3 class="subtitle">Top Songs the Month</h3>
-<table class="table is-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Artist</th>
-      <th>Album</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @spotify_user.top_tracks(time_range: 'short_term').each do |track| %>
+<div class="columns">
+  <div class="column">
+    <h3 class="subtitle">Top Songs the Month</h3>
+    <table class="table is-striped">
+      <thead>
       <tr>
-        <td><%= track.name %></td>
-        <td><%= track.artists.first.name %></td>
-        <td><%= track.album.name %></td>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Album</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
+      <tbody>
+      <% @spotify_user.top_tracks(time_range: 'short_term').each do |track| %>
+        <tr>
+          <td><%= track.name %></td>
+          <td><%= track.artists.first.name %></td>
+          <td><%= track.album.name %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column">
+    <h3 class="subtitle">Top Artists the Month</h3>
+    <table class="table is-striped">
+      <thead>
+      <tr>
+        <th>Artist</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @spotify_user.top_artists(time_range: 'short_term').each do |artist| %>
+        <tr>
+          <td><%= artist.name %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

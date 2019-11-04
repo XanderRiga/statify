@@ -10,7 +10,7 @@ class UsersController < ApplicationController
         spotify_user_hash: @spotify_user.to_hash
       )
 
-      render 'home/landing_page'
+      redirect_to landing_page_path
     else
       render 'home/index'
     end

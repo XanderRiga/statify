@@ -20,14 +20,22 @@
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
-          </a>
-        </div>
+        <% if user_signed_in? %>
+          <div class="buttons">
+            <a class="button is-primary" href="<%= destroy_user_session_path %>">
+              <strong>Logout</strong>
+            </a>
+          </div>
+        <% else %>
+          <div class="buttons">
+            <a class="button is-primary" href="<%= new_user_session_path %>">
+              <strong>Sign up</strong>
+            </a>
+            <a class="button is-light" href="<%= user_session_path %>">
+              Log in
+            </a>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

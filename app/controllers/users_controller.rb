@@ -15,4 +15,8 @@ class UsersController < ApplicationController
       render 'home/index'
     end
   end
+
+  def show
+    render 'home/index'
+  end
 end

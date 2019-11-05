@@ -41,4 +41,31 @@
       </div>
     </article>
   </div>
+  <div class="tile is-parent is-3 has-text-centered">
+    <article class="tile is-child notification is-info">
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <p class="title">Top Songs</p>
+          <table class="table is-striped is-hoverable">
+            <thead>
+              <th>Song</th>
+              <th>Album</th>
+            </thead>
+            <tbody>
+            <% @artist.top_tracks(:US).each do |track| %>
+              <tr>
+                <td><%= track.name %></td>
+                <td>
+                  <a>
+                    <%= track.album.name %>
+                  </a>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+  </div>
 </div>

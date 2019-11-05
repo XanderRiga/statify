@@ -6,7 +6,7 @@
           <p class="title"><%= @spotify_user.display_name %></p>
           <figure class="image is-square">
             <a href="<%= @spotify_user.external_urls['spotify'] %>">
-              <img src="<%= @spotify_user.images.first['url'] %>">
+              <img src="<%= @spotify_user.images.first['url'] if @spotify_user.images.any? %>">
             </a>
           </figure>
         </div>

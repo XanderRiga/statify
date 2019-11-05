@@ -19,7 +19,7 @@
       </div>
     </article>
   </div>
-  <div class="tile is-parent is-3 has-text-centered">
+  <div class="tile is-parent is-5 has-text-centered">
     <article class="tile is-child notification is-info">
       <div class="columns is-centered">
         <div class="column is-narrow">
@@ -55,6 +55,26 @@
                   <a>
                     <%= genre %>
                   </a>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="tile is-parent is-2 has-text-centered">
+    <article class="tile is-child notification is-info">
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <p class="title">Related Artists</p>
+          <table class="table is-striped is-hoverable">
+            <tbody>
+            <% @artist.related_artists.each do |artist| %>
+              <tr>
+                <td>
+                  <%= link_to artist.name, controller: 'spotify', action: 'artist', id: artist.id %>
                 </td>
               </tr>
             <% end %>

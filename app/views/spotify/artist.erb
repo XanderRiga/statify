@@ -55,11 +55,7 @@
             <% @artist.top_tracks(:US).each do |track| %>
               <tr>
                 <td><%= track.name %></td>
-                <td>
-                  <a>
-                    <%= track.album.name %>
-                  </a>
-                </td>
+                <td><%= track.album.name %></td>
               </tr>
             <% end %>
             </tbody>

@@ -13,5 +13,9 @@ Rails.application.routes.draw do
     member do
       get 'artist'
     end
+
+    collection do
+      get 'recommendations'
+    end
   end
 end

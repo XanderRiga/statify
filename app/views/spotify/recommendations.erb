@@ -1,0 +1,10 @@
+<div class="buttons">
+  <% @top_artists.each do |artist| %>
+    <button class="button"><%= artist.name %></button>
+<% end %>
+</div>
+
+<div class="buttons">
+  <button class="button is-success">Submit</button>
+  <button class="button is-danger">Cancel</button>
+</div>

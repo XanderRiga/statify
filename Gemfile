@@ -5,15 +5,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-gem "bulma-rails", "~> 0.7.5"
+gem 'bulma-rails', '~> 0.7.5'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0.rc2'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
 gem 'pry'
+gem 'puma', '~> 3.11'
 gem 'rspotify'
 gem 'rubocop', '~> 0.74.0', require: false
 # Use SCSS for stylesheets

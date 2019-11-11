@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/auth/spotify/callback', to: 'users#spotify'
 
   resources :users
-  resources :home, only: [:index, :show]
+  resources :home, only: %i[index show]
   get 'landing_page', to: 'home#show'
 
   resources :spotify do

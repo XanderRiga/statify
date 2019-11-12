@@ -38,11 +38,11 @@
             <tbody>
             <% @spotify_user.top_tracks(time_range: 'short_term', limit: 10).each do |track| %>
               <tr>
-                <td><%= track.name %></td>
+                <td><%= truncate(track.name, length: 30) %></td>
                 <td>
-                  <%= link_to track.artists.first.name, controller: 'spotify', action: 'artist', id: track.artists.first.id %>
+                  <%= link_to truncate(track.artists.first.name, length: 30), controller: 'spotify', action: 'artist', id: track.artists.first.id %>
                 </td>
-                <td><%= track.album.name %></td>
+                <td><%= truncate(track.album.name, legnth: 30) %></td>
               </tr>
             <% end %>
             </tbody>
@@ -67,11 +67,11 @@
             <tbody>
             <% @spotify_user.recently_played(limit: 10).each do |track| %>
               <tr>
-                <td><%= track.name %></td>
+                <td><%= truncate(track.name, length: 30) %></td>
                 <td>
-                  <%= link_to track.artists.first.name, controller: 'spotify', action: 'artist', id: track.artists.first.id %>
+                  <%= link_to truncate(track.artists.first.name, length: 30), controller: 'spotify', action: 'artist', id: track.artists.first.id %>
                 </td>
-                <td><%= track.album.name %></td>
+                <td><%= truncate(track.album.name, length: 30) %></td>
               </tr>
             <% end %>
             </tbody>

@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/auth/spotify/callback', to: 'users#spotify'
 
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   resources :users
   resources :home, only: %i[index show]
   get 'landing_page', to: 'home#show'

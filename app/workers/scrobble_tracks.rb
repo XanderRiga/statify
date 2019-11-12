@@ -6,8 +6,6 @@ class ScrobbleTracks
   def perform(user_id)
     recent_tracks = current_spotify_user(user_id).recently_played(limit: NUM_TRACKS)
 
-    require 'pry'
-    binding.pry
     get_scrobble_difference(recent_tracks, user_id).each do |track|
       add_scrobble(user_id, track.id)
     end

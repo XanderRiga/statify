@@ -14,6 +14,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'pry'
 gem 'puma', '~> 3.11'
+gem 'redis'
 gem 'rspotify'
 gem 'rubocop', '~> 0.74.0', require: false
 # Use SCSS for stylesheets

@@ -307,6 +307,7 @@ DEPENDENCIES
   pry
   puma (~> 3.11)
   rails (~> 6.0.0.rc2)
+  redis
   rspotify
   rubocop (~> 0.74.0)
   sass-rails (~> 5)

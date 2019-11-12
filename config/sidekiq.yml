@@ -1,4 +1,0 @@
-:schedule:
-  scrobble_users:
-    cron: '*/10 * * * *'
-    class: ScrobbleUsers

@@ -1,0 +1,3 @@
+scrobble_users:
+  cron: "*/8 * * * *"
+  class: "ScrobbleUsers"

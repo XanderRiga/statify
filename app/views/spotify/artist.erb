@@ -17,7 +17,7 @@
           <table class="table is-striped is-hoverable">
             <tbody>
             <% @artist.genres.each do |genre| %>
-              <tr><td><%= genre %></td></tr>
+              <tr><td><%= truncate(genre, length: 15) %></td></tr>
             <% end %>
             </tbody>
           </table>
@@ -43,7 +43,7 @@
             <% @artist.related_artists.each do |artist| %>
               <tr>
                 <td>
-                  <%= link_to artist.name, controller: 'spotify', action: 'artist', id: artist.id %>
+                  <%= link_to truncate(artist.name, length: 30), controller: 'spotify', action: 'artist', id: artist.id %>
                 </td>
               </tr>
             <% end %>
@@ -67,8 +67,8 @@
               <tbody>
               <% @artist.top_tracks(:US).each do |track| %>
                 <tr>
-                  <td><%= track.name %></td>
-                  <td><%= track.album.name %></td>
+                  <td><%= truncate(track.name, length: 30) %></td>
+                  <td><%= truncate(track.album.name, length: 30) %></td>
                 </tr>
               <% end %>
               </tbody>

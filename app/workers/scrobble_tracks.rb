@@ -1,3 +1,5 @@
+require 'scrobbles/to_tracks'
+
 class ScrobbleTracks
   include Sidekiq::Worker
 
@@ -16,7 +18,7 @@ class ScrobbleTracks
   def get_scrobble_difference(recent_tracks, user_id)
     saved_scrobbles = last_saved_scrobbles(user_id)
 
-    saved_tracks = tracks_from_scrobbles(saved_scrobbles)
+    saved_tracks = Scrobbles::ToTracks.new.call(scrobbles: saved_scrobbles)
 
     remove_duplicates(recent_tracks, saved_tracks)
   end
@@ -53,13 +55,6 @@ class ScrobbleTracks
     scrobbles.select do |scrobble|
       Time.now.utc > scrobble.created_at.utc - 20.minutes
     end
-  end
-
-  def tracks_from_scrobbles(scrobbles)
-    track_ids = scrobbles.map do |scrobble|
-      scrobble.track_id
-    end
-    RSpotify::Track.find(track_ids)
   end
 
   def current_spotify_user(user_id)

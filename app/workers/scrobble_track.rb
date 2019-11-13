@@ -1,4 +1,5 @@
 require 'scrobbles/to_tracks'
+require 'scrobbles/scrobble_track'
 require 'users/helpers/retrieve_spotify_user'
 
 class ScrobbleTrack
@@ -10,7 +11,7 @@ class ScrobbleTrack
     last_saved_track = saved_track(user_id)
 
     if last_listened_track.id != last_saved_track&.id
-      scrobble(user_id, last_listened_track.id)
+      Scrobbles::ScrobbleTrack.new.call(user_id: user_id, track: last_listened_track)
     end
   end
 
@@ -25,9 +26,5 @@ class ScrobbleTrack
     end
 
     nil
-  end
-
-  def scrobble(user_id, track_id)
-    Scrobble.create(user_id: user_id, track_id: track_id)
   end
 end

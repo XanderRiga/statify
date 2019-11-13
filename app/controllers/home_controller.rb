@@ -1,27 +1,18 @@
 # frozen_string_literal: true
 
+require 'users/helpers/retrieve_spotify_user'
+
 class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @spotify_user = current_spotify_user
+    @spotify_user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
 
-    return render :show if @spotify_user
+    render :show if @spotify_user
   end
 
   def show
-    @spotify_user = current_spotify_user
-    return render 'home/index' unless @spotify_user
-  end
-
-  private
-
-  def current_spotify_user
-    user = SpotifyUser.find_by(user_id: current_user.id)
-
-    return nil unless user
-
-    user_hash = user.spotify_user_hash
-    RSpotify::User.new(user_hash)
+    @spotify_user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
+    render 'home/index' unless @spotify_user
   end
 end

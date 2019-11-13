@@ -1,4 +1,5 @@
 require 'scrobbles/to_tracks'
+require 'users/helpers/retrieve_spotify_user'
 
 class ScrobbleTracks
   include Sidekiq::Worker
@@ -6,7 +7,7 @@ class ScrobbleTracks
   NUM_TRACKS = 5
 
   def perform(user_id)
-    recent_tracks = current_spotify_user(user_id).recently_played(limit: NUM_TRACKS)
+    recent_tracks = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: user_id).recently_played(limit: NUM_TRACKS)
 
     get_scrobble_difference(recent_tracks, user_id).each do |track|
       add_scrobble(user_id, track.id)
@@ -55,13 +56,5 @@ class ScrobbleTracks
     scrobbles.select do |scrobble|
       Time.now.utc > scrobble.created_at.utc - 20.minutes
     end
-  end
-
-  def current_spotify_user(user_id)
-    user = SpotifyUser.find_by(user_id: user_id)
-
-    return nil unless user
-
-    RSpotify::User.new(user.spotify_user_hash)
   end
 end

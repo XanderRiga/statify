@@ -1,93 +1,65 @@
-<div class="tile is-ancestor">
-  <div class="tile is-parent is-2 has-text-centered is-vertical">
-    <article class="tile is-child notification is-success">
-      <div class="columns is-centered">
-        <div class="column is-narrow">
-          <p class="title"><%= @artist.name %></p>
-          <figure class="image is-128x128">
-            <%= image_tag(@artist.images.first['url'], :size => "42x42") %>
-          </figure>
-        </div>
-      </div>
-    </article>
-    <article class="tile is-child notification is-success">
-      <div class="columns is-centered">
-        <div class="column is-narrow">
-          <p class="title">Genres</p>
-          <table class="table is-striped is-hoverable">
-            <tbody>
-            <% @artist.genres.each do |genre| %>
-              <tr><td><%= truncate(genre, length: 15) %></td></tr>
-            <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </article>
-    <article class="tile is-child notification is-success">
-      <div class="columns is-centered">
-        <div class="column is-narrow">
+<div class="container">
+  <div class="columns">
+    <div class="column">
+      <div class="columns">
+        <div class="column">
+          <%= image_tag(@artist.images.first['url'], :size => "256x256") %>
+          <p class="title is-2"><%= @artist.name %></p>
+          <br>
+
           <p class="title">Popularity:</p>
           <p class="subtitle is-1"><%= @artist.popularity %></p>
+          <br>
+        </div>
+        <div class="column is-three-quarters">
+          <div class="title">Albums</div>
+          <div class="columns">
+            <% @artist.albums(limit: 5, album_type: 'album').each do |album| %>
+              <% continue if album.images.empty? %>
+              <div class="column is-narrow has-text-centered">
+                <%= image_tag(album.images.first['url'], :size => "128x128") %>
+                <p class="title is-4"><%= album.name %></p>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
-    </article>
-  </div>
-  <div class="tile is-parent is-2 has-text-centered">
-    <article class="tile is-child notification is-info">
+
       <div class="columns is-centered">
-        <div class="column is-narrow">
-          <p class="title">Related Artists</p>
+        <div class="column is-narrow has-text-centered">
+          <p class="title">Top Songs</p>
           <table class="table is-striped is-hoverable">
+            <thead>
+            <th>Song</th>
+            <th>Album</th>
+            </thead>
             <tbody>
-            <% @artist.related_artists.each do |artist| %>
+            <% @artist.top_tracks(:US).each do |track| %>
               <tr>
-                <td>
-                  <%= link_to truncate(artist.name, length: 30), controller: 'spotify', action: 'artist', id: artist.id %>
-                </td>
+                <td><%= truncate(track.name, length: 30) %></td>
+                <td><%= truncate(track.album.name, length: 30) %></td>
               </tr>
             <% end %>
             </tbody>
           </table>
         </div>
-      </div>
-    </article>
-  </div>
-  <div class="tile is-5 is-vertical">
-    <div class="tile is-parent has-text-centered">
-      <article class="tile is-child notification is-info">
-        <div class="columns is-centered">
+        <div class="column is-narrow has-text-centered">
           <div class="column is-narrow">
-            <p class="title">Top Songs</p>
+            <p class="title">Related Artists</p>
             <table class="table is-striped is-hoverable">
-              <thead>
-              <th>Song</th>
-              <th>Album</th>
-              </thead>
               <tbody>
-              <% @artist.top_tracks(:US).each do |track| %>
+              <% @artist.related_artists.each do |artist| %>
                 <tr>
-                  <td><%= truncate(track.name, length: 30) %></td>
-                  <td><%= truncate(track.album.name, length: 30) %></td>
+                  <td>
+                    <%= link_to truncate(artist.name, length: 30), controller: 'spotify', action: 'artist', id: artist.id %>
+                  </td>
                 </tr>
               <% end %>
               </tbody>
             </table>
           </div>
         </div>
-      </article>
-    </div>
-    <div class="tile is-parent has-text-centered">
-      <article class="tile is-child notification is-info">
-        <div class="columns is-centered">
-          <% @artist.albums(limit: 5, album_type: 'album').each do |album| %>
-            <div class="column">
-              <p class="title"><%= album.name %></p>
-              <img src="<%= album.images.first['url'] if album.images.any? %>">
-            </div>
-          <% end %>
-        </div>
-      </article>
+      </div>
     </div>
   </div>
 </div>

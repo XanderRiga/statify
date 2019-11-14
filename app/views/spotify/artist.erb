@@ -4,8 +4,8 @@
       <div class="columns is-centered">
         <div class="column is-narrow">
           <p class="title"><%= @artist.name %></p>
-          <figure class="image is-square">
-            <img src="<%= @artist.images.first['url'] %>">
+          <figure class="image is-128x128">
+            <%= image_tag(@artist.images.first['url'], :size => "42x42") %>
           </figure>
         </div>
       </div>

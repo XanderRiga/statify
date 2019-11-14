@@ -1,33 +1,22 @@
-<div class="tile is-ancestor">
-  <div class="tile is-parent is-2 has-text-centered is-vertical">
-    <article class="tile is-child notification is-success">
-      <div class="columns is-centered">
-        <div class="column is-narrow">
-          <p class="title"><%= @spotify_user.display_name %></p>
-          <figure class="image is-square">
-            <a href="<%= @spotify_user.external_urls['spotify'] %>">
-              <img src="<%= @spotify_user.images.first['url'] if @spotify_user.images.any? %>">
-            </a>
-          </figure>
-        </div>
-      </div>
-    </article>
-    <article class="tile is-child notification is-success">
-      <div class="columns is-centered">
-        <div class="column is-narrow">
-          <p class="title">Followers:</p>
-          <p class="subtitle is-1"><%= @spotify_user.followers['total'] %></p>
-        </div>
-      </div>
-    </article>
-  </div>
+<div class="container">
+  <div class="columns">
+    <div class="column">
+      <figure class="image is-128x128">
+        <a href="<%= @spotify_user.external_urls['spotify'] %>">
+          <img src="<%= @spotify_user.images.first['url'] if @spotify_user.images.any? %>" class="is-rounded">
+        </a>
+      </figure>
+      <p class="title"><%= @spotify_user.display_name %></p>
+      <br>
 
-  <div class="tile is-parent is-5 has-text-centered">
-    <article class="tile is-child notification is-info">
+      <p class="title is-4">Followers:</p>
+      <p class="subtitle is-1"><%= @spotify_user.followers['total'] %></p>
+      <br>
+
       <div class="columns is-centered">
-        <div class="column is-narrow">
+        <div class="column is-narrow has-text-centered">
           <p class="title">Top Songs this Month</p>
-          <table class="table is-striped is-hoverable">
+          <table class="table is-striped is-hoverable is-bordered">
             <thead>
             <tr>
               <th>Title</th>
@@ -48,15 +37,9 @@
             </tbody>
           </table>
         </div>
-      </div>
-    </article>
-  </div>
-  <div class="tile is-parent is-5 has-text-centered">
-    <article class="tile is-child notification is-primary">
-      <div class="columns is-centered">
-        <div class="column is-narrow">
+        <div class="column is-narrow has-text-centered">
           <p class="title">Recently Played</p>
-          <table class="table is-striped is-hoverable">
+          <table class="table is-striped is-hoverable is-bordered">
             <thead>
             <tr>
               <th>Title</th>
@@ -78,6 +61,6 @@
           </table>
         </div>
       </div>
-    </article>
+    </div>
   </div>
 </div>

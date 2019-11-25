@@ -1,7 +1,7 @@
 <div class="container">
   <div class="buttons">
     <% @top_artists.each do |artist| %>
-      <button class="button"><%= artist.name %></button>
+      <button class="button" onclick="activate('<%= artist.id %>')" id="<%= artist.id %>"><%= artist.name %></button>
     <% end %>
   </div>
 
@@ -10,3 +10,17 @@
     <button class="button is-danger">Cancel</button>
   </div>
 </div>
+
+<script>
+  function activate(id) {
+    var element = document.getElementById(id);
+    classList = element.classList;
+
+    if (classList.contains("is-primary")) {
+      classList.remove("is-primary");
+    } else {
+      classList.add("is-primary");
+    }
+
+  }
+</script>

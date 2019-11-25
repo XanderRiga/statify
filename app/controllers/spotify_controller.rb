@@ -16,6 +16,4 @@ class SpotifyController < ApplicationController
         call(user_id: current_user.id)&.
         top_artists(limit: 50, time_range: 'short_term')
   end
-
-  private
 end

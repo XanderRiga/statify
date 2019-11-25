@@ -12,15 +12,26 @@
 </div>
 
 <script>
+  var activeArtists = [];
+
   function activate(id) {
     var element = document.getElementById(id);
     classList = element.classList;
 
     if (classList.contains("is-primary")) {
       classList.remove("is-primary");
+      removeArtist(id);
     } else {
       classList.add("is-primary");
+      activeArtists.push(id);
     }
+  }
 
+  function removeArtist(id) {
+    newArray = activeArtists.filter(function(e) {
+      return e != id
+    });
+
+    activeArtists = newArray;
   }
 </script>

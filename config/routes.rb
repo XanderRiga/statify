@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
     collection do
       get 'recommendations'
+      post 'recommendation_result'
     end
   end
 end

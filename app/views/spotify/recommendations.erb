@@ -6,7 +6,7 @@
   </div>
 
   <div class="buttons">
-    <button class="button is-success">Submit</button>
+    <%= button_to "Submit", { action: "recommendation_result", active_artists: "activeArtists" }, { class: "button is-success" } %>
     <button class="button is-danger">Cancel</button>
   </div>
 </div>

@@ -9,6 +9,8 @@ class HomeController < ApplicationController
     @spotify_user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
 
     render :show if @spotify_user
+  rescue Users::Exceptions::UserNotFound
+    render 'home/index'
   end
 
   def show

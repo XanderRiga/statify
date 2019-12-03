@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+gem 'bulma-extensions-rails'
 gem 'bulma-rails', '~> 0.7.5'
 
 gem 'capistrano', '~> 3.11'

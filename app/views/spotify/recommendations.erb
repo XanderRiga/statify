@@ -1,37 +1,15 @@
 <div class="container">
-  <div class="buttons">
-    <% @top_artists.each do |artist| %>
-      <button class="button" onclick="activate('<%= artist.id %>')" id="<%= artist.id %>"><%= artist.name %></button>
-    <% end %>
-  </div>
-
-  <div class="buttons">
-    <%= button_to "Submit", { action: "recommendation_result", active_artists: "activeArtists" }, { class: "button is-success" } %>
-    <button class="button is-danger">Cancel</button>
-  </div>
+  <%= form_with(url: 'spotify/recommendations', method: "post") do %>
+    <div class="columns">
+      <div class="column">
+        <% @top_artists.each do |artist| %>
+          <%= check_box_tag(:"#{artist.id}") %>
+          <%= label_tag(:"#{artist.id}", artist.name) %>
+        <% end %>
+      </div>
+      <div class="column">
+        <input class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range">
+      </div>
+    </div>
+  <% end %>
 </div>
-
-<script>
-  var activeArtists = [];
-
-  function activate(id) {
-    var element = document.getElementById(id);
-    classList = element.classList;
-
-    if (classList.contains("is-primary")) {
-      classList.remove("is-primary");
-      removeArtist(id);
-    } else {
-      classList.add("is-primary");
-      activeArtists.push(id);
-    }
-  }
-
-  function removeArtist(id) {
-    newArray = activeArtists.filter(function(e) {
-      return e != id
-    });
-
-    activeArtists = newArray;
-  }
-</script>

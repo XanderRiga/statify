@@ -66,6 +66,7 @@ GEM
     bootsnap (1.4.4)
       msgpack (~> 1.0)
     builder (3.2.3)
+    bulma-extensions-rails (6.2.7)
     bulma-rails (0.7.5)
       sassc (~> 2.0)
     byebug (11.0.1)
@@ -316,6 +317,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
+  bulma-extensions-rails
   bulma-rails (~> 0.7.5)
   byebug
   capistrano (~> 3.11)

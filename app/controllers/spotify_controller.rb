@@ -14,7 +14,7 @@ class SpotifyController < ApplicationController
     @top_artists = Users::Helpers::RetrieveSpotifyUser.
         new.
         call(user_id: current_user.id)&.
-        top_artists(limit: 50, time_range: 'short_term')
+        top_artists(limit: 20, time_range: 'short_term')
   end
 
   def recommendation_result

@@ -2,14 +2,46 @@
   <%= form_with(url: 'spotify/recommendations', method: "post") do %>
     <div class="columns">
       <div class="column">
-        <% @top_artists.each do |artist| %>
-          <%= check_box_tag(:"#{artist.id}", :"#{artist.id}", false, class: "is-checkradio") %>
-          <%= label_tag(:"#{artist.id}", artist.name) %>
-        <% end %>
+        <table class="table">
+          <tbody>
+            <% @top_artists.each do |artist| %>
+              <tr>
+                <td>
+                  <%= check_box_tag(:"#{artist.id}", :"#{artist.id}", false, class: "is-checkradio") %>
+                  <%= label_tag(:"#{artist.id}", artist.name) %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
       <div class="column">
         <label for="acousticness">Acousticness</label>
         <input class="slider is-fullwidth" id="acousticness" step="5" min="0" max="100" value="50" type="range">
+
+        <label for="danceability">Danceability</label>
+        <input class="slider is-fullwidth" id="danceability" step="5" min="0" max="100" value="50" type="range">
+
+        <label for="energy">Energy</label>
+        <input class="slider is-fullwidth" id="energy" step="5" min="0" max="100" value="50" type="range">
+
+        <label for="instrumentalness">Instrumentalness</label>
+        <input class="slider is-fullwidth" id="instrumentalness" step="5" min="0" max="100" value="50" type="range">
+
+        <label for="liveness">Liveness</label>
+        <input class="slider is-fullwidth" id="liveness" step="5" min="0" max="100" value="50" type="range">
+
+        <label for="loudness">Loudness</label>
+        <input class="slider is-fullwidth" id="loudness" step="5" min="0" max="100" value="50" type="range">
+
+        <label for="popularity">Popularity</label>
+        <input class="slider is-fullwidth" id="popularity" step="5" min="0" max="100" value="50" type="range">
+
+        <label for="speechiness">Speechiness</label>
+        <input class="slider is-fullwidth" id="speechiness" step="5" min="0" max="100" value="50" type="range">
+
+        <label for="valence">Valence</label>
+        <input class="slider is-fullwidth" id="valence" step="5" min="0" max="100" value="50" type="range">
       </div>
     </div>
   <% end %>

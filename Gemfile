@@ -20,7 +20,7 @@ gem 'rails', '~> 6.0.0.rc2'
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'pry'
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 gem 'redis'
 gem 'rspotify'
 gem 'rubocop', '~> 0.74.0', require: false

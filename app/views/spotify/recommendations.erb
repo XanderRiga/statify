@@ -1,13 +1,13 @@
 <div class="container">
-  <%= form_with(url: 'spotify/recommendations', method: "post") do %>
+  <%= form_with(url: recommendation_result_spotify_index_path, method: "post", local: true) do %>
     <div class="columns">
       <div class="column">
         <table class="table">
           <tbody>
-            <% @top_artists.each do |artist| %>
+            <% @top_artists.each_with_index do |artist, index| %>
               <tr>
                 <td>
-                  <%= check_box_tag(:"#{artist.id}", :"#{artist.id}", false, class: "is-checkradio") %>
+                  <%= check_box_tag(:"#{artist.name}", "#{artist.id}", false, class: "is-checkradio", name: "artist_#{index}", id: "#{artist.id}") %>
                   <%= label_tag(:"#{artist.id}", artist.name) %>
                 </td>
               </tr>
@@ -16,32 +16,37 @@
         </table>
       </div>
       <div class="column">
-        <label for="acousticness">Acousticness</label>
-        <input class="slider is-fullwidth" id="acousticness" step="5" min="0" max="100" value="50" type="range">
+        <%= label_tag(:acousticness, 'Acousticness') %>
+        <%= range_field_tag(:acousticness, :acousticness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <label for="danceability">Danceability</label>
-        <input class="slider is-fullwidth" id="danceability" step="5" min="0" max="100" value="50" type="range">
+        <%= label_tag(:danceability, 'Danceability') %>
+        <%= range_field_tag(:danceability, :danceability, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <label for="energy">Energy</label>
-        <input class="slider is-fullwidth" id="energy" step="5" min="0" max="100" value="50" type="range">
+        <%= label_tag(:energy, 'Energy') %>
+        <%= range_field_tag(:energy, :energy, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <label for="instrumentalness">Instrumentalness</label>
-        <input class="slider is-fullwidth" id="instrumentalness" step="5" min="0" max="100" value="50" type="range">
+        <%= label_tag(:instrumentalness, 'Instrumentalness') %>
+        <%= range_field_tag(:instrumentalness, :instrumentalness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <label for="liveness">Liveness</label>
-        <input class="slider is-fullwidth" id="liveness" step="5" min="0" max="100" value="50" type="range">
+        <%= label_tag(:liveness, 'Liveness') %>
+        <%= range_field_tag(:liveness, :liveness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <label for="loudness">Loudness</label>
-        <input class="slider is-fullwidth" id="loudness" step="5" min="0" max="100" value="50" type="range">
+        <%= label_tag(:loudness, 'Loudness') %>
+        <%= range_field_tag(:loudness, :loudness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <label for="popularity">Popularity</label>
-        <input class="slider is-fullwidth" id="popularity" step="5" min="0" max="100" value="50" type="range">
+        <%= label_tag(:popularity, 'Popularity') %>
+        <%= range_field_tag(:popularity, :popularity, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <label for="speechiness">Speechiness</label>
-        <input class="slider is-fullwidth" id="speechiness" step="5" min="0" max="100" value="50" type="range">
+        <%= label_tag(:speechiness, 'Speechiness') %>
+        <%= range_field_tag(:speechiness, :speechiness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <label for="valence">Valence</label>
-        <input class="slider is-fullwidth" id="valence" step="5" min="0" max="100" value="50" type="range">
+        <%= label_tag(:valence, 'Valence') %>
+        <%= range_field_tag(:valence, :valence, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+        <br>
+        <br>
+        <br>
+        <br>
+        <%= submit_tag("Submit", class: 'button is-success') %>
       </div>
     </div>
   <% end %>

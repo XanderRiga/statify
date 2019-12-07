@@ -1,53 +1,68 @@
+<%= javascript_include_tag "application" %>
+
 <div class="container">
-  <%= form_with(url: recommendation_result_spotify_index_path, method: "post", local: true) do %>
-    <div class="columns">
-      <div class="column">
-        <table class="table">
-          <tbody>
-            <% @top_artists.each_with_index do |artist, index| %>
-              <tr>
-                <td>
-                  <%= check_box_tag(:"#{artist.name}", "#{artist.id}", false, class: "is-checkradio", name: "artist_#{index}", id: "#{artist.id}") %>
-                  <%= label_tag(:"#{artist.id}", artist.name) %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <div class="column">
-        <%= label_tag(:acousticness, 'Acousticness') %>
-        <%= range_field_tag(:acousticness, :acousticness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+  <div class="columns">
+    <div class="column">
+      <%= form_with(url: recommendation_result_spotify_index_path, method: "post", local: true) do %>
+        <div class="columns">
+          <div class="column">
+            <table class="table">
+              <tbody>
+                <% @top_artists.each_with_index do |artist, index| %>
+                  <tr>
+                    <td>
+                      <%= check_box_tag(:"#{artist.name}", "#{artist.id}", false, class: "is-checkradio", name: "artist_#{index}", id: "#{artist.id}") %>
+                      <%= label_tag(:"#{artist.id}", artist.name) %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="column">
+            <%= label_tag(:acousticness, 'Acousticness') %>
+            <%= range_field_tag(:acousticness, :acousticness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <%= label_tag(:danceability, 'Danceability') %>
-        <%= range_field_tag(:danceability, :danceability, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= label_tag(:danceability, 'Danceability') %>
+            <%= range_field_tag(:danceability, :danceability, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <%= label_tag(:energy, 'Energy') %>
-        <%= range_field_tag(:energy, :energy, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= label_tag(:energy, 'Energy') %>
+            <%= range_field_tag(:energy, :energy, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <%= label_tag(:instrumentalness, 'Instrumentalness') %>
-        <%= range_field_tag(:instrumentalness, :instrumentalness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= label_tag(:instrumentalness, 'Instrumentalness') %>
+            <%= range_field_tag(:instrumentalness, :instrumentalness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <%= label_tag(:liveness, 'Liveness') %>
-        <%= range_field_tag(:liveness, :liveness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= label_tag(:liveness, 'Liveness') %>
+            <%= range_field_tag(:liveness, :liveness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <%= label_tag(:loudness, 'Loudness') %>
-        <%= range_field_tag(:loudness, :loudness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= label_tag(:loudness, 'Loudness') %>
+            <%= range_field_tag(:loudness, :loudness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <%= label_tag(:popularity, 'Popularity') %>
-        <%= range_field_tag(:popularity, :popularity, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= label_tag(:popularity, 'Popularity') %>
+            <%= range_field_tag(:popularity, :popularity, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <%= label_tag(:speechiness, 'Speechiness') %>
-        <%= range_field_tag(:speechiness, :speechiness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= label_tag(:speechiness, 'Speechiness') %>
+            <%= range_field_tag(:speechiness, :speechiness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
 
-        <%= label_tag(:valence, 'Valence') %>
-        <%= range_field_tag(:valence, :valence, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
-        <br>
-        <br>
-        <br>
-        <br>
-        <%= submit_tag("Submit", class: 'button is-success') %>
-      </div>
+            <%= label_tag(:valence, 'Valence') %>
+            <%= range_field_tag(:valence, :valence, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+    <div class="column">
+      <p id="help-text">Make selections to see recommendations</p>
+      <table class="table" id="recommendation-table">
+        <thead>
+        <tr>
+          <td>Title</td>
+          <td>Artist</td>
+          <td>Album</td>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

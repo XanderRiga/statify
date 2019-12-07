@@ -4,6 +4,7 @@ require 'rspotify'
 require 'users/helpers/retrieve_spotify_user'
 
 class SpotifyController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
 
   def artist
@@ -15,14 +16,25 @@ class SpotifyController < ApplicationController
         new.
         call(user_id: current_user.id)&.
         top_artists(limit: 20, time_range: 'short_term')
-  end
 
-  def recommendation_result
-    @tracks = RSpotify::Recommendations.generate(formatted_form_response).tracks
-    # render 'spotify/recommendation_result'
+    if params['acousticness']
+      render json: formatted_recommended_tracks(RSpotify::Recommendations.generate(formatted_form_response).tracks)
+    end
   end
 
   private
+
+  def formatted_recommended_tracks(tracks)
+    response = []
+    tracks.each do |track|
+      response << {
+          name: track.name,
+          artists: track.artists.map(&:name),
+          album: track.album.name
+      }
+    end
+    response
+  end
 
   def formatted_form_response
     {

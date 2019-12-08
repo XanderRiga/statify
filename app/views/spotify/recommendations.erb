@@ -53,17 +53,21 @@
     <div class="column">
       <h3 id="help-text" class="title is-3">Choose at least 1 artist to see recommendations</h3>
       <progress id="progress-bar" class="progress is-medium is-dark is-hidden" max="100">45%</progress>
-      <table class="table" id="recommendation-table" hidden="true">
+      <table class="table" id="recommendation-table" hidden>
         <thead>
         <tr>
-          <td>Title</td>
-          <td>Artist</td>
-          <td>Album</td>
+          <td><b>Title</b></td>
+          <td><b>Artist</b></td>
+          <td><b>Album</b></td>
         </tr>
         </thead>
         <tbody>
         </tbody>
       </table>
+      <input class="input is-hidden" id="playlist-name" type="text" placeholder="Playlist name" style="width: 50%">
+      <a class="button is-success is-hidden" id="save-button">
+        <strong>Save as playlist</strong>
+      </a>
     </div>
   </div>
 </div>

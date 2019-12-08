@@ -20,6 +20,17 @@ class SpotifyController < ApplicationController
     if params['acousticness']
       render json: formatted_recommended_tracks(RSpotify::Recommendations.generate(formatted_form_response).tracks)
     end
+
+    if params['tracks']
+      user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
+
+      playlist = user.create_playlist!(params['playlist_name'] != '' ? params['playlist_name'] : 'statify-playlist')
+
+      tracks = RSpotify::Track.find(params['tracks'])
+      playlist.add_tracks!(tracks)
+
+      render json: { success: true }
+    end
   end
 
   private
@@ -30,7 +41,8 @@ class SpotifyController < ApplicationController
       response << {
           name: track.name,
           artists: track.artists.map(&:name),
-          album: track.album.name
+          album: track.album.name,
+          id: track.id
       }
     end
     response

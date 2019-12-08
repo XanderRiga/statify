@@ -79,5 +79,5 @@ test:
 production:
   <<: *default
   database: statify_production
-  username: statify
+  username: ubuntu
   password: <%= ENV['STATIFY_DATABASE_PASSWORD'] %>

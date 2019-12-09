@@ -1,7 +1,15 @@
 //= require jquery3
 
 $(document).ready(function() {
-    $(":input").each(function() {
+    track_changes();
+
+    $("#save-button").click(function () {
+       save_playlist();
+    });
+});
+
+function track_changes() {
+    $(".recommendation-input").each(function() {
         $(this).change(function() {
             if (too_many_checked()) {
                 alert("You can only select up to 5 artists");
@@ -12,11 +20,7 @@ $(document).ready(function() {
             }
         });
     });
-
-    $("#save-button").click(function () {
-       save_playlist();
-    });
-});
+}
 
 function update_recommendations() {
     $.ajax({
@@ -61,12 +65,18 @@ function track_data() {
 
 function data_from_inputs() {
     let data = {};
-    $(":input").each(function() {
+    $(".recommendation-input").each(function() {
         let input = $(this);
 
         if (input.attr('type') === 'checkbox') {
             if (input.prop('checked') === true) {
-                data[input.attr('name')] = input.attr('value')
+                if (input.attr('value') !== '') {
+                    data[input.attr('name')] = input.attr('value')
+                } else {
+                    let number = input.attr('id').slice(-1);
+                    let jquery_string = "#artist-submit-text-" + number;
+                    data['input_artist_' + number] = $(jquery_string).val()
+                }
             }
         }
 
@@ -84,6 +94,7 @@ function set_data(data) {
         let row = '<tr><td>' + track.name + '</td><td>' + track.artists.join(', ') + '</td><td>' + track.album + '</td><td hidden>' + track.id + '</td></tr>';
 
         $('#help-text').hide();
+        $('#error-text').hide();
         hide_progress_bar();
         tableBody.append(row);
     }
@@ -107,6 +118,7 @@ function show_table() {
 function handle_error(error) {
     hide_progress_bar();
     $('#help-text').show();
+    $('#error-text').show();
     $('#recommendation-table').hide();
     $('#save-button').addClass('is-hidden');
     $('#playlist-name').addClass('is-hidden');

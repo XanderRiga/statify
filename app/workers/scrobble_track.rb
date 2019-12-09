@@ -1,9 +1,11 @@
 require 'scrobbles/to_tracks'
 require 'scrobbles/scrobble_track'
 require 'users/helpers/retrieve_spotify_user'
+require 'users/exceptions/user_not_found'
 
 class ScrobbleTrack
   include Sidekiq::Worker
+  sidekiq_options retry: false
 
   def perform(user_id)
     last_listened_track = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: user_id).recently_played(limit: 1).first
@@ -13,6 +15,9 @@ class ScrobbleTrack
     if last_listened_track.id != last_saved_track&.id
       Scrobbles::ScrobbleTrack.new.call(user_id: user_id, track: last_listened_track)
     end
+  rescue Users::Exceptions::UserNotFound, StandardError
+    # If we don't have a user, don't keep trying
+    return
   end
 
   private

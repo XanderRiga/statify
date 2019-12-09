@@ -11,8 +11,17 @@
                 <% @top_artists.each_with_index do |artist, index| %>
                   <tr>
                     <td>
-                      <%= check_box_tag(:"#{artist.name}", "#{artist.id}", false, class: "is-checkradio", name: "artist_#{index}", id: "#{artist.id}") %>
+                      <%= check_box_tag(:"#{artist.name}", "#{artist.id}", false, class: "is-checkradio recommendation-input", name: "artist_#{index}", id: "#{artist.id}") %>
                       <%= label_tag(:"#{artist.id}", artist.name) %>
+                    </td>
+                  </tr>
+                <% end %>
+                <% 5.times do |i| %>
+                  <tr>
+                    <td>
+                      <%= check_box_tag(:"artist-submit-#{i}", "", false, class: "is-checkradio recommendation-input") %>
+                      <%= label_tag(:"artist-submit-#{i}", "") %>
+                      <%= text_field_tag("artist-submit-text-#{i}", nil, placeholder: "Artist name", class: "input is-pulled-right recommendation-input", style: "width: 80%") %>
                     </td>
                   </tr>
                 <% end %>
@@ -21,37 +30,38 @@
           </div>
           <div class="column">
             <%= label_tag(:acousticness, 'Acousticness') %>
-            <%= range_field_tag(:acousticness, :acousticness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= range_field_tag(:acousticness, :acousticness, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
             <%= label_tag(:danceability, 'Danceability') %>
-            <%= range_field_tag(:danceability, :danceability, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= range_field_tag(:danceability, :danceability, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
             <%= label_tag(:energy, 'Energy') %>
-            <%= range_field_tag(:energy, :energy, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= range_field_tag(:energy, :energy, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
             <%= label_tag(:instrumentalness, 'Instrumentalness') %>
-            <%= range_field_tag(:instrumentalness, :instrumentalness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= range_field_tag(:instrumentalness, :instrumentalness, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
             <%= label_tag(:liveness, 'Liveness') %>
-            <%= range_field_tag(:liveness, :liveness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= range_field_tag(:liveness, :liveness, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
             <%= label_tag(:loudness, 'Loudness') %>
-            <%= range_field_tag(:loudness, :loudness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= range_field_tag(:loudness, :loudness, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
             <%= label_tag(:popularity, 'Popularity') %>
-            <%= range_field_tag(:popularity, :popularity, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= range_field_tag(:popularity, :popularity, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
             <%= label_tag(:speechiness, 'Speechiness') %>
-            <%= range_field_tag(:speechiness, :speechiness, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= range_field_tag(:speechiness, :speechiness, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
             <%= label_tag(:valence, 'Valence') %>
-            <%= range_field_tag(:valence, :valence, in: 1..100, step: 1, class: 'slider is-fullwidth') %>
+            <%= range_field_tag(:valence, :valence, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
           </div>
         </div>
       <% end %>
     </div>
     <div class="column">
       <h3 id="help-text" class="title is-3">Choose at least 1 artist to see recommendations</h3>
+      <h4 id="error-text" class="title is-3" hidden>If you entered an artist, make sure it is spelled correctly. If an artist cannot be found for a search, it will be ignored.</h4>
       <progress id="progress-bar" class="progress is-medium is-dark is-hidden" max="100">45%</progress>
       <table class="table" id="recommendation-table" hidden>
         <thead>

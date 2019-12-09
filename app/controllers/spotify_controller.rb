@@ -15,7 +15,7 @@ class SpotifyController < ApplicationController
     @top_artists = Users::Helpers::RetrieveSpotifyUser.
         new.
         call(user_id: current_user.id)&.
-        top_artists(limit: 20, time_range: 'short_term')
+        top_artists(limit: 15, time_range: 'short_term')
 
     if params['acousticness']
       render json: formatted_recommended_tracks(RSpotify::Recommendations.generate(formatted_form_response).tracks)
@@ -66,7 +66,11 @@ class SpotifyController < ApplicationController
   def artist_list
     artists = []
     params.each do |key, value|
-      if key.include?('artist_')
+      if key.include?('input_artist_')
+        searched_artist = RSpotify::Artist.search(value).first
+        next unless searched_artist
+        artists << searched_artist.id
+      elsif key.include?('artist_')
         artists << value
       end
     end

@@ -43,8 +43,8 @@ function playlist_save_failed(error) {
 
 function save_playlist() {
     $.ajax({
-        url: 'recommendations',
-        type: 'get',
+        url: 'save_playlist',
+        type: 'post',
         dataType: 'json',
         data: track_data(),
         success: function(data) { playlist_saved(data) },

@@ -16,21 +16,21 @@ class SpotifyController < ApplicationController
         new.
         call(user_id: current_user.id)&.
         top_artists(limit: 15, time_range: 'short_term')
-
-    if params['tracks']
-      user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
-
-      playlist = user.create_playlist!(params['playlist_name'] != '' ? params['playlist_name'] : 'statify-playlist')
-
-      tracks = RSpotify::Track.find(params['tracks'])
-      playlist.add_tracks!(tracks)
-
-      render json: { success: true }
-    end
   end
 
   def recommendation_result
     render json: formatted_recommended_tracks(RSpotify::Recommendations.generate(formatted_form_response).tracks)
+  end
+
+  def save_playlist
+    user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
+
+    playlist = user.create_playlist!(params['playlist_name'] != '' ? params['playlist_name'] : 'statify-playlist')
+
+    tracks = RSpotify::Track.find(params['tracks'])
+    playlist.add_tracks!(tracks)
+
+    render json: { success: true }
   end
 
   private

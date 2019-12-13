@@ -29,38 +29,35 @@
             </table>
           </div>
           <div class="column">
-            <%= label_tag(:acousticness, 'Acousticness') %>
+            <%= label_tag(:acousticness, 'Acousticness', title: 'Acousticness measures the likelihood a track is acoustic. High acousticness represents a high likelihood the track is acoustic.') %>
             <%= range_field_tag(:acousticness, :acousticness, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
-            <%= label_tag(:danceability, 'Danceability') %>
+            <%= label_tag(:danceability, 'Danceability', title: 'How suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity.') %>
             <%= range_field_tag(:danceability, :danceability, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
-            <%= label_tag(:energy, 'Energy') %>
+            <%= label_tag(:energy, 'Energy', title: 'Typically, tracks with high energy tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale.') %>
             <%= range_field_tag(:energy, :energy, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
-            <%= label_tag(:instrumentalness, 'Instrumentalness') %>
+            <%= label_tag(:instrumentalness, 'Instrumentalness', title: 'Instrumentalness tracks the likelihood the track contains no vocal content. High instrumentalness represents an increased probability the track has no vocals.') %>
             <%= range_field_tag(:instrumentalness, :instrumentalness, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
-            <%= label_tag(:liveness, 'Liveness') %>
+            <%= label_tag(:liveness, 'Liveness', title: 'Liveness detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live.') %>
             <%= range_field_tag(:liveness, :liveness, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
-            <%= label_tag(:loudness, 'Loudness') %>
+            <%= label_tag(:loudness, 'Loudness', title: 'Loudness values are averaged across the entire track. Tracks with high loudness are, you guessed it, louder.') %>
             <%= range_field_tag(:loudness, :loudness, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
-            <%= label_tag(:popularity, 'Popularity') %>
+            <%= label_tag(:popularity, 'Popularity', title: 'The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.') %>
             <%= range_field_tag(:popularity, :popularity, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 
-            <%= label_tag(:speechiness, 'Speechiness') %>
-            <%= range_field_tag(:speechiness, :speechiness, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
-
-            <%= label_tag(:valence, 'Valence') %>
+            <%= label_tag(:valence, 'Valence', title: 'The musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry)') %>
             <%= range_field_tag(:valence, :valence, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
           </div>
         </div>
       <% end %>
     </div>
     <div class="column">
-      <h3 id="help-text" class="title is-3">Choose at least 1 artist to see recommendations</h3>
+      <h3 id="help-text" class="title is-3">Choose at least 1 artist to see recommendations<br><br>Hover over the slider attributes to learn more about them</h3>
       <h4 id="error-text" class="title is-3" hidden>If you entered an artist, make sure it is spelled correctly. If an artist cannot be found for a search, it will be ignored.</h4>
       <progress id="progress-bar" class="progress is-medium is-dark is-hidden" max="100">45%</progress>
       <table class="table" id="recommendation-table" hidden>

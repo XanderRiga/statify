@@ -19,8 +19,6 @@ class SpotifyController < ApplicationController
   end
 
   def recommendation_result
-    require 'pry'
-    binding.pry
     render json: formatted_recommended_tracks(RSpotify::Recommendations.generate(formatted_form_response).tracks)
   end
 

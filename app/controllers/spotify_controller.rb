@@ -17,10 +17,6 @@ class SpotifyController < ApplicationController
         call(user_id: current_user.id)&.
         top_artists(limit: 15, time_range: 'short_term')
 
-    if params['acousticness']
-      render json: formatted_recommended_tracks(RSpotify::Recommendations.generate(formatted_form_response).tracks)
-    end
-
     if params['tracks']
       user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
 
@@ -31,6 +27,10 @@ class SpotifyController < ApplicationController
 
       render json: { success: true }
     end
+  end
+
+  def recommendation_result
+    render json: formatted_recommended_tracks(RSpotify::Recommendations.generate(formatted_form_response).tracks)
   end
 
   private

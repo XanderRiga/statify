@@ -19,6 +19,8 @@ class SpotifyController < ApplicationController
   end
 
   def recommendation_result
+    require 'pry'
+    binding.pry
     render json: formatted_recommended_tracks(RSpotify::Recommendations.generate(formatted_form_response).tracks)
   end
 
@@ -57,7 +59,6 @@ class SpotifyController < ApplicationController
         target_liveness: params['liveness'],
         target_loudness: params['loudness'],
         target_popularity: params['popularity'],
-        target_speechiness: params['speechiness'],
         target_valence: params['valence'],
         seed_artists: artist_list
     }

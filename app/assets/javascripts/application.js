@@ -24,8 +24,8 @@ function track_changes() {
 
 function update_recommendations() {
     $.ajax({
-        url: 'recommendations',
-        type: 'get',
+        url: 'recommendation_result',
+        type: 'post',
         dataType: 'json',
         data: data_from_inputs(),
         success: function(data) { set_data(data) },

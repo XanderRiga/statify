@@ -19,7 +19,7 @@ function upload_files() {
         processData: false,
         contentType: false,
         success: function(data) { success_response() },
-        error: function(error) { error_response() }
+        error: function(error) { error_response(error) }
     });
 }
 
@@ -27,6 +27,6 @@ function success_response() {
     alert("Files successfully uploaded. It may take some time for all of your data to be stored");
 }
 
-function error_response() {
-    alert("One or more files was not formatted correctly. Make sure you upload them directly as given from Spotify.");
+function error_response(error) {
+    alert(error.responseText);
 }

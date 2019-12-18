@@ -12,8 +12,8 @@ class DataController < ApplicationController
   end
 
   def upload_files
-    Rails.logger.info('Attempting to upload files with params: ' + params)
     files = params.select { |key| key.match?(/^file_/) }.values
+    Rails.logger.info('Attempting to upload files with params: ' + files.map(&:original_filename).join(', '))
 
     files.each do |file|
       JSON.parse(file.read) # Want this to raise if the files are not json parseable, we don't save the parsed output
@@ -32,6 +32,8 @@ class DataController < ApplicationController
 
     render json: { success: 'success' }, status: 200
   rescue JSON::ParserError => e
-    render json: { error: 'One or more of the files could not be read.' }, status: 400
+    render json: { error: 'One or more files was not formatted correctly. Make sure you upload them directly as given from Spotify.' }, status: 400
+  rescue StandardError => e
+    render json: { error: e.message }, status: 400
   end
 end

@@ -30,7 +30,10 @@ class DataController < ApplicationController
     end
 
     render json: { success: 'success' }, status: 200
-  rescue JSON::ParserError
+  rescue JSON::ParserError => e
+    Rails.logger.info('Parser error: ' + e.message)
     render json: { error: 'One or more of the files could not be read.' }, status: 400
+  rescue StandardError => e
+    Rails.logger.debug("Unknown exception raised: #{e.message}")
   end
 end

@@ -26,7 +26,7 @@ class DataController < ApplicationController
           file_path: file_path
         )
 
-        SaveStreamingHistoryJob.perform_async(steaming_history.id)
+        StreamingHistory::SaveFileJob.perform_async(steaming_history.id)
       end
     end
 

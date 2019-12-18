@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_13_230344) do
+ActiveRecord::Schema.define(version: 2019_12_18_184301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_11_13_230344) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.text "artist_ids"
+    t.string "track_name"
+    t.string "artist_name"
     t.index ["user_id"], name: "index_scrobbles_on_user_id"
   end
 
@@ -28,6 +30,12 @@ ActiveRecord::Schema.define(version: 2019_11_13_230344) do
     t.jsonb "spotify_user_hash", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_spotify_users_on_user_id"
+  end
+
+  create_table "streaming_histories", force: :cascade do |t|
+    t.string "file_path", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_streaming_histories_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,4 +52,5 @@ ActiveRecord::Schema.define(version: 2019_11_13_230344) do
 
   add_foreign_key "scrobbles", "users"
   add_foreign_key "spotify_users", "users"
+  add_foreign_key "streaming_histories", "users"
 end

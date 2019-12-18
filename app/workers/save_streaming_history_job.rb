@@ -1,7 +1,7 @@
 require 'json'
 require 'rspotify'
 
-class SaveStreamingHistory
+class SaveStreamingHistoryJob
   include Sidekiq::Worker
 
   def perform(streaming_history_id)
@@ -11,7 +11,7 @@ class SaveStreamingHistory
 
     json_data.each do |data_point|
       unless Scrobble.find_by(track_name: data_point['trackName'], artist_name: data_point['artistName'], created_at: data_point['endTime'])
-        SaveStreamingHistoryTrack.perform_async(data_point.to_json, streaming_history.user_id)
+        SaveStreamingHistoryTrackJob.perform_async(data_point.to_json, streaming_history.user_id)
       end
     end
 

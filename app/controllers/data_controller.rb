@@ -9,6 +9,9 @@ class DataController < ApplicationController
   before_action :authenticate_user!
 
   def upload
+  end
+
+  def upload_files
     files = params.select { |key| key.match?(/^file_/) }.values
 
     files.each do |file|
@@ -26,6 +29,7 @@ class DataController < ApplicationController
       end
     end
 
+    render json: { success: 'success' }, status: 200
   rescue JSON::ParserError
     render json: { error: 'One or more of the files could not be read.' }, status: 400
   end

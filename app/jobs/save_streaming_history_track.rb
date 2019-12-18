@@ -4,8 +4,6 @@ class SaveStreamingHistoryTrack
   include Sidekiq::Worker
 
   def perform(json_listen, user_id)
-    require 'pry'
-    binding.pry
     listen = JSON.parse(json_listen)
 
     track = RSpotify::Track.search(listen['trackName'] + ' ' + listen['artistName']).first

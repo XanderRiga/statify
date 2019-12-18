@@ -12,6 +12,7 @@ class DataController < ApplicationController
   end
 
   def upload_files
+    Rails.logger.info('Attempting to upload files with params: ' + params)
     files = params.select { |key| key.match?(/^file_/) }.values
 
     files.each do |file|
@@ -21,8 +22,8 @@ class DataController < ApplicationController
       unless File.file?(file_path)
         FileUtils.mv(file.tempfile, file_path)
         steaming_history = StreamingHistory.create!(
-            user_id: current_user.id,
-            file_path: file_path
+          user_id: current_user.id,
+          file_path: file_path
         )
 
         SaveStreamingHistory.perform_async(steaming_history.id)
@@ -31,9 +32,6 @@ class DataController < ApplicationController
 
     render json: { success: 'success' }, status: 200
   rescue JSON::ParserError => e
-    Rails.logger.info('Parser error: ' + e.message)
     render json: { error: 'One or more of the files could not be read.' }, status: 400
-  rescue StandardError => e
-    Rails.logger.debug("Unknown exception raised: #{e.message}")
   end
 end

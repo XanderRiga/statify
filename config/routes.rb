@@ -20,4 +20,12 @@ Rails.application.routes.draw do
       post 'save_playlist'
     end
   end
+
+  resources :data do
+    collection do
+      get 'upload'
+      post 'upload'
+      post 'upload_files'
+    end
+  end
 end

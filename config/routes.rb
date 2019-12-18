@@ -1,9 +1,15 @@
 # frozen_string_literal: true
+require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  devise_for :admins
   devise_for :users
   root 'home#index'
   get '/auth/spotify/callback', to: 'users#spotify'
+
+  authenticate :admin do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   resources :users
   resources :home, only: %i[index show]

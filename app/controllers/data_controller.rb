@@ -18,7 +18,7 @@ class DataController < ApplicationController
     files.each do |file|
       JSON.parse(file.read) # Want this to raise if the files are not json parseable, we don't save the parsed output
 
-      file_path = ENV['FILE_UPLOAD_PATH'] + file.original_filename
+      file_path = ENV['FILE_UPLOAD_PATH'] + Time.now.to_i.to_s + file.original_filename
       unless File.file?(file_path)
         FileUtils.mv(file.tempfile, file_path)
         steaming_history = StreamingHistory.create!(

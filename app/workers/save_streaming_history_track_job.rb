@@ -1,6 +1,6 @@
 require 'rspotify'
 
-class SaveStreamingHistoryTrack
+class SaveStreamingHistoryTrackJob
   include Sidekiq::Worker
 
   def perform(json_listen, user_id)

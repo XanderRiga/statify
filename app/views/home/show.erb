@@ -15,23 +15,19 @@
 
       <div class="columns is-centered">
         <div class="column is-narrow has-text-centered">
-          <p class="title">Top Songs this Month</p>
+          <p class="title">Top Artists</p>
           <table class="table is-striped is-hoverable is-bordered">
             <thead>
             <tr>
-              <th>Title</th>
               <th>Artist</th>
-              <th>Album</th>
             </tr>
             </thead>
             <tbody>
-            <% @spotify_user.top_tracks(time_range: 'short_term', limit: 10).each do |track| %>
+            <% @top_artists.each do |artist_name, hash| %>
               <tr>
-                <td><%= truncate(track.name, length: 30) %></td>
                 <td>
-                  <%= link_to truncate(track.artists.first.name, length: 30), controller: 'spotify', action: 'artist', id: track.artists.first.id %>
+                  <%= link_to truncate(artist_name, length: 30), controller: 'spotify', action: 'artist', id: hash['id'] %>
                 </td>
-                <td><%= truncate(track.album.name, legnth: 30) %></td>
               </tr>
             <% end %>
             </tbody>
@@ -48,7 +44,7 @@
             </tr>
             </thead>
             <tbody>
-            <% @spotify_user.recently_played(limit: 10).each do |track| %>
+            <% @recently_played.each do |track| %>
               <tr>
                 <td><%= truncate(track.name, length: 30) %></td>
                 <td>

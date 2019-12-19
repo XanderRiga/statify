@@ -1,3 +1,7 @@
 scrobble_users:
   cron: "*/1 * * * *"
   class: "ScrobbleUsers"
+
+refresh_users:
+  cron: "* * */1 * *"
+  class: "RefreshUsers"

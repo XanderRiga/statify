@@ -2,6 +2,11 @@ require 'rspotify'
 
 class SaveStreamingHistoryTrackJob
   include Sidekiq::Worker
+  sidekiq_options retry: 20
+
+  sidekiq_retry_in do |count, exception|
+    1.hour.to_i * count
+  end
 
   def perform(json_listen, user_id)
     listen = JSON.parse(json_listen)

@@ -27,6 +27,7 @@ gem 'rspotify'
 gem 'rubocop', '~> 0.74.0', require: false
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5'
+gem 'sentry-raven'
 
 gem 'sidekiq'
 gem "sidekiq-cron", "~> 1.1"

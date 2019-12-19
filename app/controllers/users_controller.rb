@@ -7,10 +7,17 @@ class UsersController < ApplicationController
     if user_signed_in?
       @spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
 
-      SpotifyUser.create(
-        user_id: current_user.id,
-        spotify_user_hash: @spotify_user.to_hash
-      )
+      if SpotifyUser.exists?(user_id: current_user.id)
+        spotify_user = SpotifyUser.find_by(user_id: current_user.id)
+        spotify_user.update(
+          spotify_user_hash: @spotify_user.to_hash
+        )
+      else
+        SpotifyUser.create(
+          user_id: current_user.id,
+          spotify_user_hash: @spotify_user.to_hash
+        )
+      end
 
       redirect_to landing_page_path
     else

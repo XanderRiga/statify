@@ -15,25 +15,6 @@
 
       <div class="columns is-centered">
         <div class="column is-narrow has-text-centered">
-          <p class="title">Top Artists</p>
-          <table class="table is-striped is-hoverable is-bordered">
-            <thead>
-            <tr>
-              <th>Artist</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @top_artists.each do |artist_name, hash| %>
-              <tr>
-                <td>
-                  <%= link_to truncate(artist_name, length: 30), controller: 'spotify', action: 'artist', id: hash['id'] %>
-                </td>
-              </tr>
-            <% end %>
-            </tbody>
-          </table>
-        </div>
-        <div class="column is-narrow has-text-centered">
           <p class="title">Recently Played</p>
           <table class="table is-striped is-hoverable is-bordered">
             <thead>

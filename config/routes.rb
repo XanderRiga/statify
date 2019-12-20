@@ -34,4 +34,11 @@ Rails.application.routes.draw do
       post 'upload_files'
     end
   end
+
+  resources :statistics do
+    collection do
+      get 'artists'
+      post 'top_artists'
+    end
+  end
 end

@@ -1,0 +1,42 @@
+<%= javascript_include_tag "statistics_artists" %>
+
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-narrow has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-narrow has-text-centered">
+          <p class="title is-4">Start Date</p>
+          <input type="date" class="track-change" name="start-date" id="start-date">
+        </div>
+        <div class="column is-narrow has-text-centered">
+          <p class="title is-4">End Date</p>
+          <input type="date" class='track-change' name="end-date" id="end-date">
+        </div>
+      </div>
+    </div>
+    <div class="column is-narrow has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-narrow has-text-centered">
+          <table class="table" id="result-table" hidden>
+            <thead>
+            <tr>
+              <td><b>Artist</b></td>
+              <td><b>Number of listens</b></td>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <div id="error-text" class="error-text is-hidden">
+            <p class="title is-4">
+              You don't have enough data for this range.
+            </p>
+            <p class="title is-4">
+              Try uploading your streaming history <a href="/data/upload">here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

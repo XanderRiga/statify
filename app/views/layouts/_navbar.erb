@@ -15,6 +15,17 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Statistics
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="<%= artists_statistics_path %>">
+            Artists
+          </a>
+        </div>
+      </div>
+
       <a class="navbar-item" href="<%= recommendations_spotify_index_path %>">
         Recommendations
       </a>

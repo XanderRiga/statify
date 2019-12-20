@@ -9,7 +9,6 @@ class HomeController < ApplicationController
     @spotify_user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
 
     if @spotify_user
-      @top_artists = Statistics::Artists.top(user_id: current_user.id).first(10)
       @recently_played = @spotify_user.recently_played(limit: 10)
       render :show
     end
@@ -19,7 +18,6 @@ class HomeController < ApplicationController
 
   def show
     @spotify_user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
-    @top_artists = Statistics::Artists.top(user_id: current_user.id).first(10)
     @recently_played = @spotify_user.recently_played(limit: 10)
 
     render 'home/index' unless @spotify_user

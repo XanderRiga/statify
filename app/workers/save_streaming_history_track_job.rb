@@ -2,7 +2,11 @@ require 'rspotify'
 
 class SaveStreamingHistoryTrackJob
   include Sidekiq::Worker
+  include Sidekiq::Throttled::Worker
+
   sidekiq_options retry: 20
+
+  sidekiq_throttle({ :threshold => { :limit => 1, :period => 1 } }) # 1 job per second max
 
   sidekiq_retry_in do |count, exception|
     1.hour.to_i * count

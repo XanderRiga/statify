@@ -31,6 +31,7 @@ gem 'sentry-raven'
 
 gem 'sidekiq'
 gem "sidekiq-cron", "~> 1.1"
+gem 'sidekiq-throttled'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

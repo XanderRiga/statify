@@ -8,10 +8,7 @@ ruby '2.6.3'
 gem 'bulma-extensions-rails'
 gem 'bulma-rails', '~> 0.7.5'
 
-gem 'capistrano', '~> 3.11'
-gem 'capistrano-rails', '~> 1.4'
-gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+gem 'chartkick'
 
 gem 'devise'
 gem 'jquery-rails'

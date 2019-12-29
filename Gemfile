@@ -9,6 +9,8 @@ gem 'bulma-extensions-rails'
 gem 'bulma-rails', '~> 0.7.5'
 
 gem 'chartkick'
+gem 'groupdate'
+gem 'hightop'
 
 gem 'devise'
 gem 'jquery-rails'

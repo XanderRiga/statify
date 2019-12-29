@@ -17,6 +17,8 @@
     <div class="column is-narrow has-text-centered">
       <div class="columns is-centered">
         <div class="column is-narrow has-text-centered">
+          <%= column_chart Scrobble.where(user_id: current_user.id).group_by_week(:created_at).count, title: 'Listens' %>
+
           <table class="table" id="result-table" hidden>
             <thead>
             <tr>

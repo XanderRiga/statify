@@ -39,6 +39,8 @@ Rails.application.routes.draw do
     collection do
       get 'artists'
       post 'top_artists'
+      get 'tracks'
+      post 'top_tracks'
     end
   end
 end

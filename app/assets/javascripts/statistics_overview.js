@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 function get_updated_stats() {
     $.ajax({
-        url: 'top_tracks',
+        url: 'overview_data',
         type: 'post',
         dataType: 'json',
         data: dates(),
@@ -27,21 +27,10 @@ function dates() {
 }
 
 function update_results(data) {
-    let tableBody = $('#result-table tbody');
-    tableBody.empty();
+    let chart_area = $('.charts');
+    chart_area.empty();
 
-    if (data.length <= 3) {
-        $('#result-table').hide();
-        show_error_text();
-        return;
-    }
-    for (let record of data) {
-        let link = '/spotify/' + record[1]['artist_id'] + '/artist';
-        let row = '<tr><td>'  + record[0] + '</td><td><a href=' + link + '>'  + record[1]['artist'] + '</a></td><td>' + record[1]['occurrences'] + '</td></tr>';
 
-        tableBody.append(row);
-    }
-    $('#result-table').show();
     hide_error_text();
 }
 

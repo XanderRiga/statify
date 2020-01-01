@@ -1,4 +1,4 @@
-<%= javascript_include_tag "statistics_tracks" %>
+<%= javascript_include_tag "statistics_overview" %>
 
 <div class="container">
   <div class="columns is-centered">
@@ -17,17 +17,8 @@
     <div class="column is-narrow has-text-centered">
       <div class="columns is-centered">
         <div class="column is-narrow has-text-centered">
-          <table class="table" id="result-table" hidden>
-            <thead>
-            <tr>
-              <td><b>Track</b></td>
-              <td><b>Artist</b></td>
-              <td><b>Number of listens</b></td>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
+          <div class="charts">
+          </div>
           <div id="error-text" class="error-text is-hidden">
             <p class="title is-4">
               You don't have enough data for this range.

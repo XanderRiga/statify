@@ -5,6 +5,15 @@ class StatisticsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
 
+  def overview
+  end
+
+  def overview_data
+    return render json: {}, status: 400 if params['start_date'].empty? || params['end_date'].empty?
+
+    render json: { start_date: params['start_date'], end_date: params['end_date'] }
+  end
+
   def artists
   end
 

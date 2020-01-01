@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   resources :statistics do
     collection do
+      get 'overview'
       get 'artists'
       post 'top_artists'
       get 'tracks'

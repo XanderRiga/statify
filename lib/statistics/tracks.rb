@@ -8,7 +8,9 @@ module Statistics
           if hash[scrobble.track_name] == {}
             hash[scrobble.track_name] = {
                 'occurrences' => 0,
-                'id' => scrobble.track_id
+                'id' => scrobble.track_id,
+                'artist' => scrobble.artist_name,
+                'artist_id' => scrobble.artist_ids.first
             }
           end
           hash[scrobble.track_name]['occurrences'] += 1

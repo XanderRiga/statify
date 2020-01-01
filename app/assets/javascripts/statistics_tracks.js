@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 function get_updated_stats() {
     $.ajax({
-        url: 'top_artists',
+        url: 'top_tracks',
         type: 'post',
         dataType: 'json',
         data: dates(),

@@ -5,12 +5,9 @@
     <div class="column is-narrow has-text-centered">
       <div class="columns is-centered">
         <div class="column is-narrow has-text-centered">
-          <p class="title is-4">Start Date</p>
-          <input type="date" class="track-change" name="start-date" id="start-date">
-        </div>
-        <div class="column is-narrow has-text-centered">
-          <p class="title is-4">End Date</p>
-          <input type="date" class='track-change' name="end-date" id="end-date">
+<!--          <button class="button is-success">Past Year</button>-->
+<!--          <button class="button is-success">Past Month</button>-->
+<!--          <button class="button is-success">Past Week</button>-->
         </div>
       </div>
     </div>
@@ -18,6 +15,7 @@
       <div class="columns is-centered">
         <div class="column is-narrow has-text-centered">
           <div class="charts">
+            <%= column_chart Scrobble.where(user_id: current_user.id).group_by_month(:created_at).count, title: 'Listens by Month', width: "700px", height: "300px" %>
           </div>
           <div id="error-text" class="error-text is-hidden">
             <p class="title is-4">

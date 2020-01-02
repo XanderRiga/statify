@@ -30,7 +30,6 @@ function update_results(data) {
     let chart_area = $('.charts');
     chart_area.empty();
 
-
     hide_error_text();
 }
 

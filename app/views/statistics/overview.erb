@@ -14,12 +14,16 @@
     <div class="column is-narrow has-text-centered">
       <div class="columns is-centered">
         <div class="column is-narrow has-text-centered">
+          <p class="title is-2">Total Listens: <%= Scrobble.where(user_id: current_user).count %></p>
+          <br>
           <div class="charts">
             <%= column_chart Scrobble.where(user_id: current_user.id).group_by_month(:created_at, format: '%b %Y').count, title: 'Listens by Month', width: "800px", height: "300px" %>
             <br>
 
             <%= pie_chart Scrobble.where(user_id: current_user.id).group_by_day_of_week(:created_at, format: '%A').count, title: 'Listens by Day of the Week', width: "800px", height: "300px" %>
             <br>
+
+            <%= pie_chart @top_vs_other_artists, title: 'Percentage of listens that are from top 10 artists', width: "800px", height: "300px" %>
           </div>
           <div class="column is-narrow has-text-centered">
             <div class="columns is-centered">

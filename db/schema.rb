@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_220340) do
+ActiveRecord::Schema.define(version: 2020_02_09_222156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,31 @@ ActiveRecord::Schema.define(version: 2019_12_18_220340) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "albums", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "spotify_id", null: false
+    t.text "genres"
+    t.string "label"
+    t.integer "popularity"
+    t.string "release_date"
+    t.integer "total_tracks"
+    t.bigint "track_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["track_id"], name: "index_albums_on_track_id"
+  end
+
+  create_table "artists", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "spotify_id", null: false
+    t.text "genres"
+    t.integer "popularity"
+    t.bigint "album_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["album_id"], name: "index_artists_on_album_id"
   end
 
   create_table "scrobbles", force: :cascade do |t|
@@ -48,6 +73,19 @@ ActiveRecord::Schema.define(version: 2019_12_18_220340) do
     t.string "file_path", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_streaming_histories_on_user_id"
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "spotify_id", null: false
+    t.integer "duration_ms"
+    t.boolean "explicit"
+    t.string "played_at"
+    t.string "popularity"
+    t.string "preview_url"
+    t.integer "track_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

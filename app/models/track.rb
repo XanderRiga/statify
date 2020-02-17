@@ -1,3 +1,4 @@
 class Track < ApplicationRecord
-  has_many :albums
+  has_one :album
+  has_many :artists
 end

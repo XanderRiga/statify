@@ -3,7 +3,7 @@ class ScrobbleUsers
 
   def perform
     User.all.each do |user|
-      ScrobbleTrack.perform_async(user.id)
+      TrackHear.perform_async(user.id)
     end
   end
 end

@@ -1,11 +1,13 @@
 require 'statistics/artists'
 require 'statistics/tracks'
+require 'statistics/hears'
 
 class StatisticsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
 
   def overview
+    @explicit_hash = Statistics::Hears.explicit_hash(user_id: current_user.id)
   end
 
   def overview_data

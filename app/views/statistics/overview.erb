@@ -23,7 +23,7 @@
             <%= pie_chart Hear.where(user_id: current_user.id).group_by_day_of_week(:created_at, format: '%A').count, title: 'Listens by Day of the Week', width: "800px", height: "300px" %>
             <br>
 
-            <%#= pie_chart @top_vs_other_artists, title: 'Percentage of listens that are from top 10 artists', width: "800px", height: "300px" %>
+            <%= pie_chart @explicit_hash, title: 'Explicit Listens', width: "800px", height: "300px" %>
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 //= require jquery3
 
 $(document).ready(function() {
-    get_top_artists();
-    get_top_tracks();
+    // get_top_artists();
+    // get_top_tracks();
 });
 
 function get_top_artists() {

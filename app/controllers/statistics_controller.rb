@@ -6,14 +6,6 @@ class StatisticsController < ApplicationController
   before_action :authenticate_user!
 
   def overview
-    top_hash = Scrobble.where(user_id: current_user).where.not(artist_name: 'Unknown Artist').top(:artist_name, 10)
-    top_total = top_hash.map {|h, k| k}.sum
-
-    top_artists = top_hash.map {|h, k| h }
-    top_artists << 'Unknown Artist'
-
-    other_total = Scrobble.where(user_id: current_user).where.not(artist_name: top_artists).top(:artist_name).map {|h, k| k}.sum
-    @top_vs_other_artists = {'Top Artists' => top_total, 'Other Artists' => other_total}
   end
 
   def overview_data

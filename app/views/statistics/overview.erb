@@ -2,17 +2,21 @@
 
 <div class="container">
   <div class="columns is-centered">
-    <div class="column is-narrow has-text-centered">
+    <div class="column is-full has-text-centered">
       <p class="title is-2">Total Listens: <%= Hear.where(user_id: current_user).count %></p>
       <br>
-      <div class="charts">
-        <%= column_chart Hear.where(user_id: current_user.id).group_by_month(:created_at, format: '%b %Y').count, title: 'Listens by Month', width: "800px", height: "300px" %>
-        <br>
+      <%= column_chart Hear.where(user_id: current_user.id).group_by_month(:created_at, format: '%b %Y').count, title: 'Listens by Month' %>
+      <br>
 
-        <%= pie_chart Hear.where(user_id: current_user.id).group_by_day_of_week(:created_at, format: '%A').count, title: 'Listens by Day of the Week', width: "800px", height: "300px" %>
-        <br>
-        <%= pie_chart @explicit_hash, title: 'Explicit Listens', width: "800px", height: "300px" %>
-        <%= pie_chart @popular_listens_hash, title: 'Popularity of Listens', width: "800px", height: "300px" %>
+      <%= pie_chart Hear.where(user_id: current_user.id).group_by_day_of_week(:created_at, format: '%A').count, title: 'Listens by Day of the Week' %>
+      <br>
+
+      <div class="columns is-centered">
+        <div class="column is-narrow has-text-centered">
+          <%= pie_chart @explicit_hash, title: 'Explicit Listens', width: "600px", height: "300px" %>
+        </div>
+        <div class="column is-narrow has-text-centered">
+          <%= pie_chart @popular_listens_hash, title: 'Popularity of Listens', width: "600px", height: "300px" %>
         </div>
       </div>
     </div>

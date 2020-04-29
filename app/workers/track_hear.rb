@@ -25,7 +25,7 @@ class TrackHear
       # Since this is a where, this is technically a list even though we only want the last one
       hear = Hear.where(user_id: user_id).order('created_at desc').limit(1).last
 
-      return RSpotify::Track.find(Track.find(hear.track_id).spotify_id)
+      return RSpotify::Track.find(hear.track.spotify_id)
     end
 
     nil

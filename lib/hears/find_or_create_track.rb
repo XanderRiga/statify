@@ -3,6 +3,7 @@ require 'hears/find_or_create_album'
 
 module Hears
   class FindOrCreateTrack
+    # This takes in an RSpotify::Track, not to be confused with the model Track
     def call(track:)
       if (return_track = Track.find_by(spotify_id: track.id))
         return return_track

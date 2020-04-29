@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_232556) do
+ActiveRecord::Schema.define(version: 2020_02_09_222156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(version: 2020_02_17_232556) do
     t.text "genres"
     t.integer "popularity"
     t.bigint "album_id"
+    t.bigint "track_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "track_id"
     t.index ["album_id"], name: "index_artists_on_album_id"
     t.index ["track_id"], name: "index_artists_on_track_id"
   end
@@ -58,8 +58,6 @@ ActiveRecord::Schema.define(version: 2020_02_17_232556) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
-    t.bigint "track_id", null: false
-    t.index ["track_id"], name: "index_hears_on_track_id"
     t.index ["user_id"], name: "index_hears_on_user_id"
   end
 
@@ -95,10 +93,10 @@ ActiveRecord::Schema.define(version: 2020_02_17_232556) do
     t.string "popularity"
     t.string "preview_url"
     t.integer "track_number"
+    t.bigint "hear_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "hears_id"
-    t.index ["hears_id"], name: "index_tracks_on_hears_id"
+    t.index ["hear_id"], name: "index_tracks_on_hear_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -113,7 +111,6 @@ ActiveRecord::Schema.define(version: 2020_02_17_232556) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "hears", "tracks"
   add_foreign_key "hears", "users"
   add_foreign_key "scrobbles", "users"
   add_foreign_key "spotify_users", "users"

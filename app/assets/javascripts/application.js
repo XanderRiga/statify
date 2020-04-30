@@ -6,6 +6,10 @@ $(document).ready(function() {
     $("#save-button").click(function () {
        save_playlist();
     });
+
+    $('#feeling-lucky').click(function () {
+        feelingLucky();
+    })
 });
 
 function track_changes() {
@@ -39,6 +43,16 @@ function playlist_saved(data) {
 
 function playlist_save_failed(error) {
     alert("Playlist failed to save");
+}
+
+function feelingLucky() {
+    $.ajax({
+        url: 'feeling_lucky',
+        type: 'post',
+        dataType: 'json',
+        success: function(data) { set_data(data) },
+        error: function(error) { handle_error(error) }
+    })
 }
 
 function save_playlist() {

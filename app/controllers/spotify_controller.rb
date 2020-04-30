@@ -12,14 +12,15 @@ class SpotifyController < ApplicationController
   end
 
   def recommendations
-    @top_artists = Users::Helpers::RetrieveSpotifyUser.
-        new.
-        call(user_id: current_user.id)&.
-        top_artists(limit: 15, time_range: 'short_term')
+    @top_artists = top_artists
   end
 
   def recommendation_result
     render json: formatted_recommended_tracks(RSpotify::Recommendations.generate(formatted_form_response).tracks)
+  end
+
+  def feeling_lucky
+    render json: formatted_recommended_tracks(RSpotify::Recommendations.generate(feeling_lucky_params).tracks)
   end
 
   def save_playlist
@@ -62,6 +63,20 @@ class SpotifyController < ApplicationController
     }
   end
 
+  def feeling_lucky_params
+    {
+        target_acousticness: rand(100),
+        target_danceability: rand(100),
+        target_energy: rand(100),
+        target_instrumentalness: rand(100),
+        target_liveness: rand(100),
+        target_loudness: rand(100),
+        target_popularity: rand(100),
+        target_valence: rand(100),
+        seed_artists: top_artists.sample(5).map(&:id)
+    }
+  end
+
   def artist_list
     artists = []
     params.each do |key, value|
@@ -75,5 +90,12 @@ class SpotifyController < ApplicationController
     end
 
     artists
+  end
+
+  def top_artists
+    Users::Helpers::RetrieveSpotifyUser.
+        new.
+        call(user_id: current_user.id)&.
+        top_artists(limit: 15, time_range: 'short_term')
   end
 end

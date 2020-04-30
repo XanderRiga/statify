@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     collection do
       get 'recommendations'
       post 'recommendation_result'
+      post 'feeling_lucky'
       post 'save_playlist'
     end
   end

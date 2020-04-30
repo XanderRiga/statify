@@ -1,4 +1,5 @@
 require 'rspotify'
+require 'hears/find_or_create_track'
 
 class SaveStreamingHistoryTrackJob
   include Sidekiq::Worker
@@ -15,15 +16,19 @@ class SaveStreamingHistoryTrackJob
   def perform(json_listen, user_id)
     listen = JSON.parse(json_listen)
 
-    track = RSpotify::Track.search(listen['trackName'] + ' ' + listen['artistName']).first
-    Scrobble.create(
-      track_id: track.id,
-      created_at: listen['endTime'],
-      user_id: user_id,
-      updated_at: listen['endTime'],
-      artist_ids: track.artists.map(&:id),
-      track_name: listen['trackName'],
-      artist_name: listen['artistName']
-    ) if track
+    rspotify_track = RSpotify::Track.search(listen['trackName'] + ' ' + listen['artistName']).first
+
+    unless rspotify_track
+      return
+    end
+
+    db_track = Hears::FindOrCreateTrack.new.call(track: rspotify_track)
+
+    Hear.create(
+        user_id: user_id,
+        track: db_track,
+        created_at: listen['endTime'],
+        updated_at: listen['endTime']
+    ) if db_track
   end
 end

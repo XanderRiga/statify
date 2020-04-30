@@ -4,7 +4,7 @@ module Hears
   class TrackHear
     def call(user_id:, track:)
       db_track = Hears::FindOrCreateTrack.new.call(track: track)
-      Hear.create(user_id: user_id, track: db_track)
+      Hear.create(user_id: user_id, track: db_track) if db_track
     end
   end
 end

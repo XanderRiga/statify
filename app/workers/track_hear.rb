@@ -8,9 +8,14 @@ class TrackHear
   def perform(user_id)
     last_listened_track = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: user_id).
         recently_played(limit: 1).first
+
+    Rails.logger.info("User #{user_id} last listened to #{last_listened_track.name}")
     last_saved_track = saved_track(user_id)
 
+    Rails.logger.info("User #{user_id} last saved #{last_saved_track.name}")
+
     if last_listened_track.id != last_saved_track&.id
+      Rails.logger.info("Last listened and saved are different, trying to save #{last_listened_track.name} for user: #{user_id}")
       Hears::TrackHear.new.call(user_id: user_id, track: last_listened_track)
     end
   rescue StandardError

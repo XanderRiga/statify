@@ -11,7 +11,6 @@ class TrackHear
     Rails.logger.info("User #{user_id} last listened to #{last_listened_track.name}")
 
     last_saved_track = saved_track(user_id)
-    Rails.logger.info("User #{user_id} last saved #{last_saved_track.name}")
 
     if last_listened_track.id != last_saved_track&.id
       Rails.logger.info("Last listened and saved are different, trying to save #{last_listened_track.name} for user: #{user_id}")
@@ -19,7 +18,7 @@ class TrackHear
     end
   rescue StandardError => e
     # No point in continuing if this failed, it will just fail again.
-    Rails.logger.info("Error when tracking for user: #{user_id}. Error: #{e}")
+    Rails.logger.info("Error when saving track for user: #{user_id}. Error: #{e}")
     return
   end
 

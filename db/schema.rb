@@ -57,7 +57,9 @@ ActiveRecord::Schema.define(version: 2020_02_09_222156) do
   create_table "hears", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "track_id", null: false
     t.bigint "user_id", null: false
+    t.index ["track_id"], name: "index_hears_on_track_id"
     t.index ["user_id"], name: "index_hears_on_user_id"
   end
 
@@ -93,10 +95,8 @@ ActiveRecord::Schema.define(version: 2020_02_09_222156) do
     t.string "popularity"
     t.string "preview_url"
     t.integer "track_number"
-    t.bigint "hear_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["hear_id"], name: "index_tracks_on_hear_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 2020_02_09_222156) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "hears", "tracks"
   add_foreign_key "hears", "users"
   add_foreign_key "scrobbles", "users"
   add_foreign_key "spotify_users", "users"

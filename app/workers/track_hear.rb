@@ -17,8 +17,9 @@ class TrackHear
       Rails.logger.info("Last listened and saved are different, trying to save #{last_listened_track.name} for user: #{user_id}")
       Hears::TrackHear.new.call(user_id: user_id, track: last_listened_track)
     end
-  rescue StandardError
+  rescue StandardError => e
     # No point in continuing if this failed, it will just fail again.
+    Rails.logger("Error when tracking for user: #{user_id}. Error: #{e}")
     return
   end
 

@@ -9,7 +9,7 @@ module Hears
         track: track,
         created_at: scrobble.created_at,
         updated_at: scrobble.updated_at
-      )
+      ) if track
     end
   end
 end

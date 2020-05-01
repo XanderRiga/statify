@@ -27,8 +27,12 @@ class TrackHear
 
   def saved_track(user_id)
     if Hear.where(user_id: user_id).exists?
+      Rails.logger("User #{user_id} has at least one hear")
+
       # Since this is a where, this is technically a list even though we only want the last one
       hear = Hear.where(user_id: user_id).order('created_at desc').limit(1).last
+
+      Rails.logger("The last hear from user: #{user_id} is: #{hear.id} with spotify id: #{hear.track.spotify_id}")
 
       return RSpotify::Track.find(hear.track.spotify_id)
     end

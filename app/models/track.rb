@@ -1,6 +1,5 @@
 class Track < ApplicationRecord
-  has_one :album
-  has_many :artists
-
+  belongs_to :album
+  has_and_belongs_to_many :artists
   has_many :hears
 end

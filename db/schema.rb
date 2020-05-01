@@ -35,10 +35,15 @@ ActiveRecord::Schema.define(version: 2020_02_09_222156) do
     t.integer "popularity"
     t.string "release_date"
     t.integer "total_tracks"
-    t.bigint "track_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["track_id"], name: "index_albums_on_track_id"
+  end
+
+  create_table "albums_artists", id: false, force: :cascade do |t|
+    t.bigint "artist_id", null: false
+    t.bigint "album_id", null: false
+    t.index ["album_id"], name: "index_albums_artists_on_album_id"
+    t.index ["artist_id"], name: "index_albums_artists_on_artist_id"
   end
 
   create_table "artists", force: :cascade do |t|
@@ -46,12 +51,15 @@ ActiveRecord::Schema.define(version: 2020_02_09_222156) do
     t.string "spotify_id", null: false
     t.text "genres"
     t.integer "popularity"
-    t.bigint "album_id"
-    t.bigint "track_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["album_id"], name: "index_artists_on_album_id"
-    t.index ["track_id"], name: "index_artists_on_track_id"
+  end
+
+  create_table "artists_tracks", id: false, force: :cascade do |t|
+    t.bigint "artist_id", null: false
+    t.bigint "track_id", null: false
+    t.index ["artist_id"], name: "index_artists_tracks_on_artist_id"
+    t.index ["track_id"], name: "index_artists_tracks_on_track_id"
   end
 
   create_table "hears", force: :cascade do |t|
@@ -95,8 +103,10 @@ ActiveRecord::Schema.define(version: 2020_02_09_222156) do
     t.string "popularity"
     t.string "preview_url"
     t.integer "track_number"
+    t.bigint "album_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["album_id"], name: "index_tracks_on_album_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -27,7 +27,7 @@ class TrackHear
 
   def saved_track(user_id)
     Rails.logger.info("Checking for last saved track for user: #{user_id}")
-    if Hear.where(user_id: user_id).exists?
+    if Hear.find_by(user_id: user_id)
       Rails.logger("User #{user_id} has at least one hear")
 
       # Since this is a where, this is technically a list even though we only want the last one

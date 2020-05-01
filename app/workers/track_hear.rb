@@ -19,7 +19,7 @@ class TrackHear
     end
   rescue StandardError => e
     # No point in continuing if this failed, it will just fail again.
-    Rails.logger("Error when tracking for user: #{user_id}. Error: #{e}")
+    Rails.logger.info("Error when tracking for user: #{user_id}. Error: #{e}")
     return
   end
 

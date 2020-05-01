@@ -1,11 +1,5 @@
 class CreateArtist < ActiveRecord::Migration[6.0]
   def change
-    create_table :hears do |t|
-      t.timestamps
-    end
-
-    add_reference :hears, :user, null: false, foreign_key: true
-
     create_table :tracks do |t|
       t.string :name, null: false
       t.string :spotify_id, null: false
@@ -15,10 +9,17 @@ class CreateArtist < ActiveRecord::Migration[6.0]
       t.string :popularity
       t.string :preview_url
       t.integer :track_number
-      t.belongs_to :hear
 
       t.timestamps
     end
+
+    create_table :hears do |t|
+      t.timestamps
+
+      t.belongs_to :track, foreign_key: true, null: false
+    end
+
+    add_reference :hears, :user, null: false, foreign_key: true
 
     create_table :albums do |t|
       t.string :name, null: false

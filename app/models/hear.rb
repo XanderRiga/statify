@@ -1,3 +1,3 @@
 class Hear < ApplicationRecord
-  has_one :track, required: true
+  belongs_to :track
 end

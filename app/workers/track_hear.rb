@@ -37,6 +37,7 @@ class TrackHear
       return RSpotify::Track.find(hear.track.spotify_id)
     end
 
+    Rails.logger.info("No last saved track found for user: #{user_id}")
     nil
   end
 end

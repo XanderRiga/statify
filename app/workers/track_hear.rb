@@ -8,10 +8,9 @@ class TrackHear
   def perform(user_id)
     last_listened_track = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: user_id).
         recently_played(limit: 1).first
-
     Rails.logger.info("User #{user_id} last listened to #{last_listened_track.name}")
-    last_saved_track = saved_track(user_id)
 
+    last_saved_track = saved_track(user_id)
     Rails.logger.info("User #{user_id} last saved #{last_saved_track.name}")
 
     if last_listened_track.id != last_saved_track&.id
@@ -26,6 +25,7 @@ class TrackHear
   private
 
   def saved_track(user_id)
+    Rails.logger.info("Checking for last saved track for user: #{user_id}")
     if Hear.where(user_id: user_id).exists?
       Rails.logger("User #{user_id} has at least one hear")
 

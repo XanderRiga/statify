@@ -21,7 +21,7 @@ module Statistics
       artist_name && artist_name != 'Unknown Artist'
     end
 
-    def self.top_5_last_6_months(user_id:)
+    def self.top_6_months(user_id:)
       start_date = Time.now.beginning_of_month
       end_date = Time.now
 
@@ -34,7 +34,7 @@ module Statistics
         ).slice(0, 4)
 
         start_date = start_date.last_month
-        end_date = end_date.last_month
+        end_date = start_date.end_of_month
       end
 
       top_artists

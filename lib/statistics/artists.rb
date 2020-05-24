@@ -18,7 +18,7 @@ module Statistics
     end
 
     def self.valid_artist(artist_name)
-      artist_name && artist_name != 'Unknown Artist'
+      artist_name && artist_name != 'Unknown Artist' && artist_name != ''
     end
 
     def self.top_6_months(user_id:)

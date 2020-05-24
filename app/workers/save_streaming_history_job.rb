@@ -10,8 +10,12 @@ class SaveStreamingHistoryJob
     json_data = JSON.parse(file.read)
 
     json_data.each do |data_point|
-      unless Hear.find_by(track: Track.where(name: data_point['trackName']).where(artists: Artist.where('name like ?', "%#{data_point['artistName']}%")),
-                          created_at: data_point['endTime'])
+      unless Hear.find_by(
+          track: Track.joins(:artists)
+                     .where(name: data_point['trackName'])
+                     .where('artists.name like :name', { name: "%#{data_point['artistName']}%" }),
+          created_at: data_point['endTime']
+      )
         SaveStreamingHistoryTrackJob.perform_async(data_point.to_json, streaming_history.user_id)
       end
     end

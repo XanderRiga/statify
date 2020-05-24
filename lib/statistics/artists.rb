@@ -31,7 +31,7 @@ module Statistics
             user_id: user_id,
             start_date: start_date,
             end_date: end_date
-        ).slice(0, 4)
+        ).slice(0, 5)
 
         start_date = start_date.last_month
         end_date = start_date.end_of_month

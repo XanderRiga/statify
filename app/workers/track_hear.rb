@@ -39,5 +39,9 @@ class TrackHear
 
     Rails.logger.info("No last saved track found for user: #{user_id}")
     nil
+  rescue StandardError => e
+    Rails.logger.info("Exception when finding last saved track for: #{user_id}")
+    Rails.logger.info("Exception: #{e}")
+    nil
   end
 end

@@ -9,6 +9,8 @@ class StatisticsController < ApplicationController
   def overview
     @explicit_hash = Statistics::Hears.explicit_hash(user_id: current_user.id)
     @popular_listens_hash = Statistics::Hears.popular_listens_hash(user_id: current_user.id)
+    @top_artists = Statistics::Artists.top(user_id: current_user.id)
+    @top_tracks = Statistics::Tracks.top(user_id: current_user.id)
   end
 
   def overview_data

@@ -19,6 +19,37 @@
           <%= pie_chart @popular_listens_hash, title: 'Popularity of Listens', width: "600px", height: "300px" %>
         </div>
       </div>
+
+      <div class="columns is-centered">
+        <div class="column is-narrow has-text-centered">
+          <table class="table" id="artist-table">
+            <thead>
+            <tr>
+              <td><b>Top Artists</b></td>
+            </tr>
+            </thead>
+            <tbody>
+              <% @top_artists.each do |artist, count| %>
+                <tr><td><%= artist %></td></tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="column is-narrow has-text-centered">
+          <table class="table" id="artist-table">
+            <thead>
+            <tr>
+              <td><b>Top Tracks</b></td>
+            </tr>
+            </thead>
+            <tbody>
+            <% @top_tracks.each do |track, count| %>
+                <tr><td><%= track %></td></tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

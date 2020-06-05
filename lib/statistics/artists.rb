@@ -25,7 +25,7 @@ module Statistics
             start_date: start_date,
             end_date: end_date
         )
-        top_artists << { start_date.strftime('%B') => top_hash }
+        top_artists << { start_date.strftime('%B %Y') => top_hash }
 
         start_date = start_date.last_month
         end_date = start_date.end_of_month

@@ -16,15 +16,16 @@ module Statistics
 
     def self.top_6_months(user_id:)
       start_date = Time.now.beginning_of_month
-      end_date = Time.now
+      end_date = Time.now.end_of_month
 
       top_artists = []
       6.times do
-        top_artists << self.top(
+        top_hash = self.top(
             user_id: user_id,
             start_date: start_date,
             end_date: end_date
-        ).slice(0, 5)
+        )
+        top_artists << { start_date.strftime('%B') => top_hash }
 
         start_date = start_date.last_month
         end_date = start_date.end_of_month

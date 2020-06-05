@@ -10,8 +10,8 @@ class StatisticsController < ApplicationController
     @explicit_hash = Statistics::Hears.explicit_hash(user_id: current_user.id)
     @popular_listens_hash = Statistics::Hears.popular_listens_hash(user_id: current_user.id)
     @top_artists = Statistics::Artists.top(user_id: current_user.id)
-    @top_tracks = Statistics::Tracks.top(user_id: current_user.id)
-  end
+    @top_artists_6_months = Statistics::Artists.top_6_months(user_id: current_user.id)
+ end
 
   def overview_data
     return render json: {}, status: 400 if params['start_date'].empty? || params['end_date'].empty?

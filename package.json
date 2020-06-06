@@ -12,6 +12,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "jstimezonedetect": "^1.0.7",
     "webpack-dev-server": "^3.8.0"
   }
 }

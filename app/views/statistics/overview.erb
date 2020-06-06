@@ -3,12 +3,18 @@
 <div class="container">
   <div class="columns is-centered">
     <div class="column is-full has-text-centered">
-      <p class="title is-2">Total Listens: <%= Hear.where(user_id: current_user).count %></p>
+      <p class="title is-2">Total All Time Listens: <%= Hear.where(user_id: current_user).count %></p>
+      <p class="title is-3">
+        Total <i>Unique</i> Song Listens: <%= Hear.joins(:track).where(user_id: current_user).select('tracks.name').distinct.count %>
+      </p>
+      <p class="title is-3">
+        Total <i>Unique</i> Artist Listens: <%= Hear.joins(track: [:artists]).where(user_id: current_user).select('artists.name').distinct.count %>
+      </p>
       <br>
       <%= column_chart Hear.where(user_id: current_user.id).group_by_month(:created_at, format: '%b %Y').count, title: 'Listens by Month' %>
       <br>
 
-      <%= pie_chart Hear.where(user_id: current_user.id).group_by_day_of_week(:created_at, format: '%A').count, title: 'Listens by Day of the Week' %>
+      <%= column_chart Hear.where(user_id: current_user.id).group_by_day_of_week(:created_at, format: '%A').count, title: 'Listens by Day of the Week' %>
       <br>
 
       <div class="columns is-centered">

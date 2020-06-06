@@ -1,43 +1,48 @@
 <div class="container">
-  <div class="columns">
-    <div class="column">
-      <figure class="image is-128x128">
-        <a href="<%= @spotify_user.external_urls['spotify'] %>">
-          <img src="<%= @spotify_user.images.first['url'] if @spotify_user.images.any? %>" class="is-rounded">
-        </a>
-      </figure>
-      <p class="title"><%= @spotify_user.display_name %></p>
-      <br>
-
-      <p class="title is-4">Followers:</p>
-      <p class="subtitle is-1"><%= @spotify_user.followers['total'] %></p>
-      <br>
-
-      <div class="columns is-centered">
-        <div class="column is-narrow has-text-centered">
-          <p class="title">Recently Played</p>
-          <table class="table is-striped is-hoverable is-bordered">
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Artist</th>
-              <th>Album</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @recently_played.each do |track| %>
-              <tr>
-                <td><%= truncate(track.name, length: 30) %></td>
-                <td>
-                  <%= link_to truncate(track.artists.first.name, length: 30), controller: 'spotify', action: 'artist', id: track.artists.first.id %>
-                </td>
-                <td><%= truncate(track.album.name, length: 30) %></td>
-              </tr>
-            <% end %>
-            </tbody>
-          </table>
-        </div>
+  <div class="columns is-centered">
+    <div class="column is-narrow has-text-centered">
+      <div class="tile">
+        <article class="tile is-child notification is-success">
+          <p class="title is-1"><%= @spotify_user.display_name %></p>
+        </article>
       </div>
+      <br>
+      <% if (currently_playing = @spotify_user.player.currently_playing) %>
+        <div class="tile">
+          <article class="tile is-child notification">
+            <p class="title is-4">Currently Listening to:</p>
+            <p class="subtitle is-3"><%= currently_playing.name %> - <%= currently_playing.artists.first.name %></p>
+          </article>
+        </div>
+      <% else %>
+        <div class="tile">
+          <article class="tile is-child notification">
+            <p class="title is-4">Followers:</p>
+            <p class="subtitle is-1"><%= @spotify_user.followers['total'] %></p>
+          </article>
+        </div>
+      <% end %>
+    </div>
+    <div class="column is-narrow has-text-centered">
+      <p class="title">Recently Played</p>
+      <table class="table is-striped is-hoverable is-bordered">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Artist</th>
+          <th>Album</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @recently_played.each do |track| %>
+          <tr>
+            <td><%= truncate(track.name, length: 30) %></td>
+            <td><%= truncate(track.artists.first.name, length: 30) %></td>
+            <td><%= truncate(track.album.name, length: 30) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

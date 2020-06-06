@@ -11,6 +11,7 @@ class StatisticsController < ApplicationController
     @popular_listens_hash = Statistics::Hears.popular_listens_hash(user_id: current_user.id)
     @top_artists = Statistics::Artists.top(user_id: current_user.id)
     @top_artists_6_months = Statistics::Artists.top_6_months(user_id: current_user.id).reverse
+    @time_listened = Statistics::Tracks.time_listened(user_id: current_user.id)
  end
 
   def overview_data

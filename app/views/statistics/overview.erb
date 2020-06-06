@@ -3,26 +3,52 @@
 <div class="container">
   <div class="columns is-centered">
     <div class="column is-full has-text-centered">
-      <p class="title is-2">Total All Time Listens: <%= Hear.where(user_id: current_user).count %></p>
-      <p class="title is-3">
-        Total <i>Unique</i> Song Listens: <%= Hear.joins(:track).where(user_id: current_user).select('tracks.name').distinct.count %>
-      </p>
-      <p class="title is-3">
-        Total <i>Unique</i> Artist Listens: <%= Hear.joins(track: [:artists]).where(user_id: current_user).select('artists.name').distinct.count %>
-      </p>
+      <div class="columns is-centered">
+        <div class="column is-narrow has-text-centered">
+          <div class="tile">
+            <article class="tile is-child notification">
+              <p class="title">All Time Plays</p>
+              <p class="title is-3"><%= Hear.where(user_id: current_user).count %></p>
+            </article>
+          </div>
+          <br>
+          <div class="tile">
+            <article class="tile is-child notification">
+              <p class="title">All Time Unique Song Plays</p>
+              <p class="title is-3"><%= Hear.joins(:track).where(user_id: current_user).select('tracks.name').distinct.count %></p>
+            </article>
+          </div>
+        </div>
+        <div class="column is-narrow has-text-centered">
+          <div class="tile">
+            <article class="tile is-child notification">
+              <p class="title">All Time Hours Played</p>
+              <p class="title is-3"><%= @time_listened %></p>
+            </article>
+          </div>
+          <br>
+          <div class="tile">
+            <article class="tile is-child notification">
+              <p class="title">All Time Unique Artist Plays</p>
+              <p class="title is-3"><%= Hear.joins(track: [:artists]).where(user_id: current_user).select('artists.name').distinct.count %></p>
+            </article>
+          </div>
+        </div>
+      </div>
+
       <br>
-      <%= column_chart Hear.where(user_id: current_user.id).group_by_month(:created_at, format: '%b %Y').count, title: 'Listens by Month' %>
+      <%= column_chart Hear.where(user_id: current_user.id).group_by_month(:created_at, format: '%b %Y').count, title: 'Plays by Month' %>
       <br>
 
-      <%= column_chart Hear.where(user_id: current_user.id).group_by_day_of_week(:created_at, format: '%A').count, title: 'Listens by Day of the Week' %>
+      <%= column_chart Hear.where(user_id: current_user.id).group_by_day_of_week(:created_at, format: '%A').count, title: 'Plays by Day of the Week' %>
       <br>
 
       <div class="columns is-centered">
         <div class="column is-narrow has-text-centered">
-          <%= pie_chart @explicit_hash, title: 'Explicit Listens', width: "600px", height: "300px" %>
+          <%= pie_chart @explicit_hash, title: 'Explicit Plays', width: "600px", height: "300px" %>
         </div>
         <div class="column is-narrow has-text-centered">
-          <%= pie_chart @popular_listens_hash, title: 'Popularity of Listens', width: "600px", height: "300px" %>
+          <%= pie_chart @popular_listens_hash, title: 'Popularity of Plays', width: "600px", height: "300px" %>
         </div>
       </div>
 

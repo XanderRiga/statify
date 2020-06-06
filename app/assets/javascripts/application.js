@@ -1,5 +1,4 @@
 //= require jquery3
-//= require jsTimezoneDetect
 
 $(document).ready(function() {
     track_changes();

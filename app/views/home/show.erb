@@ -11,7 +11,7 @@
         <div class="tile">
           <article class="tile is-child notification">
             <p class="title is-4">Currently Listening to:</p>
-            <p class="subtitle is-3"><%= currently_playing.name %> - <%= currently_playing.artists.first.name %></p>
+            <p class="subtitle is-3"><%= truncate(currently_playing.name, length: 30) %> - <%= truncate(currently_playing.artists.first.name, length: 20) %></p>
           </article>
         </div>
       <% else %>
@@ -19,6 +19,20 @@
           <article class="tile is-child notification">
             <p class="title is-4">Followers:</p>
             <p class="subtitle is-1"><%= @spotify_user.followers['total'] %></p>
+          </article>
+        </div>
+      <% end %>
+      <br>
+      <% if Hear.where(user_id: current_user.id).count < 100 %>
+        <div class="tile">
+          <article class="tile is-child notification">
+            <p class="is-1">
+              Statify can only see new listens from after you signed up.
+              <br>
+              If you want to see more historical data, please go to
+              <br>
+              the Upload Spotify Data tab and follow the directions there.
+            </p>
           </article>
         </div>
       <% end %>

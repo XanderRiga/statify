@@ -65,6 +65,11 @@
       <h3 id="help-text" class="title is-3">Choose at least 1 artist to see recommendations<br><br>Hover over the slider attributes to learn more about them</h3>
       <h4 id="error-text" class="title is-3" hidden>If you entered an artist, make sure it is spelled correctly. If an artist cannot be found for a search, it will be ignored.</h4>
       <progress id="progress-bar" class="progress is-medium is-dark is-hidden" max="100">45%</progress>
+      <input class="input is-hidden" id="playlist-name" type="text" placeholder="Playlist name" style="width: 50%">
+      <a class="button is-success is-hidden" id="save-button">
+        <strong>Save as playlist</strong>
+      </a>
+      <br>
       <table class="table" id="recommendation-table" hidden>
         <thead>
         <tr>
@@ -76,10 +81,6 @@
         <tbody>
         </tbody>
       </table>
-      <input class="input is-hidden" id="playlist-name" type="text" placeholder="Playlist name" style="width: 50%">
-      <a class="button is-success is-hidden" id="save-button">
-        <strong>Save as playlist</strong>
-      </a>
     </div>
   </div>
 </div>

@@ -3,11 +3,17 @@
 <div class="container">
   <div class="columns">
     <div class="column">
-      <a class="button is-success" id="feeling-lucky">
-        <strong>I'm Feeling Lucky</strong>
-      </a>
-      <br>
-      <br>
+      <div class="columns">
+        <div class="column">
+          <a class="button is-success" id="feeling-lucky">
+            <strong>I'm Feeling Lucky</strong>
+          </a>
+        </div>
+        <div class="column">
+          <%= label_tag(:playlist_size, 'Playlist Size (1-100)', title: 'Number of songs in the resulting playlist') %>
+          <%= range_field_tag(:playlist_size, :playlist_size, in: 1..100, step: 1, value: 35, class: 'slider is-fullwidth recommendation-input playlist-size') %>
+        </div>
+      </div>
       <%= form_with(url: recommendation_result_spotify_index_path, method: "post", local: true) do %>
         <div class="columns">
           <div class="column">
@@ -34,6 +40,7 @@
             </table>
           </div>
           <div class="column">
+            <br>
             <%= label_tag(:acousticness, 'Acousticness', title: 'Acousticness measures the likelihood a track is acoustic. High acousticness represents a high likelihood the track is acoustic.') %>
             <%= range_field_tag(:acousticness, :acousticness, in: 1..100, step: 1, class: 'slider is-fullwidth recommendation-input') %>
 

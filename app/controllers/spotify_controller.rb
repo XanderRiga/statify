@@ -2,6 +2,7 @@
 
 require 'rspotify'
 require 'users/helpers/retrieve_spotify_user'
+require 'enumerator'
 
 class SpotifyController < ApplicationController
   skip_before_action :verify_authenticity_token
@@ -28,8 +29,10 @@ class SpotifyController < ApplicationController
 
     playlist = user.create_playlist!(params['playlist_name'] != '' ? params['playlist_name'] : 'statify-playlist')
 
-    tracks = RSpotify::Track.find(params['tracks'])
-    playlist.add_tracks!(tracks)
+    # We can only query and add 50 tracks at a time
+    params['tracks'].each_slice(50) do |track_sublist|
+      playlist.add_tracks!(RSpotify::Track.find(track_sublist))
+    end
 
     render json: { success: true }
   end
@@ -59,7 +62,8 @@ class SpotifyController < ApplicationController
         target_loudness: params['loudness'],
         target_popularity: params['popularity'],
         target_valence: params['valence'],
-        seed_artists: artist_list
+        seed_artists: artist_list,
+        limit: params['playlist_size']
     }
   end
 

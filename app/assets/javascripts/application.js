@@ -86,6 +86,8 @@ function data_from_inputs() {
             if (input.prop('checked') === true) {
                 if (input.attr('value') !== '') {
                     data[input.attr('name')] = input.attr('value')
+                } else if (input.classList.contains('playlist-size')) {
+                    data['playlist_size'] = $('#playlist-size')
                 } else {
                     let number = input.attr('id').slice(-1);
                     let jquery_string = "#artist-submit-text-" + number;

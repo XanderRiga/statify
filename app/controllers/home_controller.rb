@@ -24,6 +24,14 @@ class HomeController < ApplicationController
                              .order(created_at: :asc)
                              .last(10)
 
+    most_played_ids = Hear.where(user_id: current_user.id).top(:track_id, 10)
+
+    @most_played_tracks = []
+    most_played_ids.each do |id, count|
+      track = Track.find(id)
+      @most_played_tracks << { name: track.name, artist: track.artists.first.name, plays: count }
+    end
+
     if recently_played_db
       @recently_played = recently_played_db.reverse.map do |hear|
         hear.track

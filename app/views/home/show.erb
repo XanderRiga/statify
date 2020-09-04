@@ -40,7 +40,7 @@
           </tr>
           </thead>
           <tbody>
-          <% @recently_played.each do |track| %>
+          <% @recently_played&.each do |track| %>
             <tr>
               <td><%= truncate(track.name, length: 30) %></td>
               <td><%= truncate(track.artists.first.name, length: 30) %></td>
@@ -61,7 +61,7 @@
             </tr>
             </thead>
             <tbody>
-            <% @most_played_tracks.each do |track| %>
+            <% @most_played_tracks&.each do |track| %>
               <tr>
                 <td><%= truncate(track[:name], length: 30) %></td>
                 <td><%= truncate(track[:artist], length: 30) %></td>

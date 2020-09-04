@@ -26,6 +26,7 @@ class SpotifyController < ApplicationController
 
   def save_playlist
     user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
+    render json: { success: false } unless user
 
     playlist = user.create_playlist!(params['playlist_name'] != '' ? params['playlist_name'] : 'statify-playlist')
 

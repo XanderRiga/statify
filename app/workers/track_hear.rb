@@ -6,8 +6,10 @@ class TrackHear
   sidekiq_options retry: false
 
   def perform(user_id)
-    last_listened_track = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: user_id).
-        recently_played(limit: 1).first
+    last_listened_track = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: user_id)&.
+        recently_played(limit: 1)&.first
+
+    return if not last_listened_track # we may get a nil for the spotify user, so just let it pass if it is
     Rails.logger.info("User #{user_id} last listened to #{last_listened_track.name}")
 
     last_saved_track = saved_track(user_id)

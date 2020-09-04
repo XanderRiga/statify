@@ -3,9 +3,25 @@ $section-padding-medium: 9rem 1.5rem !default;
 $success: hsl(156, 78%, 41%);
 $link: hsl(163, 51%, 51%);
 $primary: hsl(173, 85%, 45%);
-$info: hsl(192, 21%, 41%);
-$warning: hsl(27, 100%, 70%);
+$info: hsl(226, 46%, 46%);
+$warning: hsl(167, 92%, 15%);
 $danger: hsl(0, 100%, 70%);
 
 @import "bulma";
-@import 'bulma-extensions';
+@import "bulma-extensions";
+
+.clipper {
+  clip-path: circle();
+}
+.split-background {
+  background: linear-gradient(
+    to bottom,
+    hsl(156, 78%, 41%) 0%,
+    hsl(156, 78%, 41%) 15%,
+    #e1faf9 15%,
+    #e1faf9 100%
+  );
+}
+.transparent {
+  background-color: transparent;
+}

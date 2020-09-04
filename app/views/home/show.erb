@@ -1,62 +1,78 @@
-<div class="container">
+<% require 'users/helpers/retrieve_spotify_user' %>
+
+<div class="container split-background">
   <div class="columns is-centered">
-    <div class="column is-narrow has-text-centered">
-      <div class="tile">
-        <article class="tile is-child notification is-success">
-          <p class="title is-1"><%= @spotify_user.display_name %></p>
-        </article>
-      </div>
+    <div class="column is-10 has-text-centered">
+    <%= image_tag(@spotify_user.images.first['url'], :class=> 'clipper') %>
       <br>
-      <% if (currently_playing = @spotify_user&.player&.currently_playing) %>
-        <div class="tile">
-          <article class="tile is-child notification">
-            <p class="title is-4">Currently Listening to:</p>
-            <p class="subtitle is-3"><%= truncate(currently_playing.name, length: 30) %> - <%= truncate(currently_playing.artists.first.name, length: 20) %></p>
+      <div class="columns">
+          <article class="column notification transparent">
+            <p class="title is-4 has-text-warning">Followers:</p>
+            <p class="subtitle is-3 has-text-warning"><%= @spotify_user.followers['total'] %></p>
           </article>
-        </div>
+          <article class="column notification transparent">
+            <p class="subtitle is-3 has-text-warning"><%= @spotify_user.display_name %></p>
+          </article>
+          <article class="column notification transparent">
+            <p class="title is-4 has-text-warning">Lifetime Listens:</p>
+            <p class="subtitle is-3 has-text-warning"><%= Hear.where(user_id: current_user).count %></p>
+          </article>
+          </div>
+      <br>
+      <% if Hear.where(user_id: current_user.id).count < 1 %>
+        <p class="title is-4">
+          Statify can only see new listens from after you signed up.
+          <br>
+          If you want to see more historical data, please go to
+          <br>
+          the Upload Spotify Data tab and follow the directions there.
+        </p>
       <% else %>
-        <div class="tile">
-          <article class="tile is-child notification">
-            <p class="title is-4">Followers:</p>
-            <p class="subtitle is-1"><%= @spotify_user.followers['total'] %></p>
-          </article>
-        </div>
-      <% end %>
-      <br>
-      <% if Hear.where(user_id: current_user.id).count < 100 %>
-        <div class="tile">
-          <article class="tile is-child notification">
-            <p class="is-1">
-              Statify can only see new listens from after you signed up.
-              <br>
-              If you want to see more historical data, please go to
-              <br>
-              the Upload Spotify Data tab and follow the directions there.
-            </p>
-          </article>
-        </div>
-      <% end %>
-    </div>
-    <div class="column is-narrow has-text-centered">
-      <p class="title">Recently Played</p>
-      <table class="table is-striped is-hoverable is-bordered">
-        <thead>
-        <tr>
-          <th>Title</th>
-          <th>Artist</th>
-          <th>Album</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @recently_played.each do |track| %>
+      <div class="columns is-fullwidth">
+        <div class="column is-fullwidth">
+        <p class="title has-text-warning">Recently Played</p>
+        <table class="table is-striped is-hoverable is-bordered is-fullwidth has-text-warning">
+          <thead>
           <tr>
-            <td><%= truncate(track.name, length: 30) %></td>
-            <td><%= truncate(track.artists.first.name, length: 30) %></td>
-            <td><%= truncate(track.album.name, length: 30) %></td>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Album</th>
           </tr>
-        <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+          <% @recently_played.each do |track| %>
+            <tr>
+              <td><%= truncate(track.name, length: 30) %></td>
+              <td><%= truncate(track.artists.first.name, length: 30) %></td>
+              <td><%= truncate(track.album.name, length: 30) %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        </div>
+        <div class="column">
+        <p class="title has-text-warning">Most Played</p>
+          <table class="table is-striped is-hoverable is-bordered is-fullwidth has-text-warning">
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Artist</th>
+              <th>Plays</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @most_played_tracks.each do |track| %>
+              <tr>
+                <td><%= truncate(track[:name], length: 30) %></td>
+                <td><%= truncate(track[:artist], length: 30) %></td>
+                <td><%= track[:plays] %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>

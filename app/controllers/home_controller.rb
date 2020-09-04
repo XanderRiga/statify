@@ -8,16 +8,16 @@ class HomeController < ApplicationController
   def index
     @spotify_user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
 
-    if @spotify_user
-      @recently_played = @spotify_user.recently_played(limit: 10)
-      render :show
-    end
-  rescue Users::Exceptions::UserNotFound
-    render 'home/index'
+    return render 'home/index' unless @spotify_user
+
+    @recently_played = @spotify_user.recently_played(limit: 10)
+    render :show
   end
 
   def show
     @spotify_user = Users::Helpers::RetrieveSpotifyUser.new.call(user_id: current_user.id)
+
+    render 'home/index' unless @spotify_user
 
     recently_played_db = Hear
                              .where(user_id: current_user.id)
@@ -31,7 +31,5 @@ class HomeController < ApplicationController
     else
       @recently_played = @spotify_user.recently_played(limit: 10)
     end
-
-    render 'home/index' unless @spotify_user
   end
 end

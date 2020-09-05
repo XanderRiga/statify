@@ -24,7 +24,7 @@ class HomeController < ApplicationController
                              .order(created_at: :asc)
                              .last(10)
 
-    most_played_ids = Hear.where(user_id: current_user.id).top(:track_id, 10)
+    most_played_ids = Hear.where(user_id: current_user.id).joins(:track).where.not('tracks.name' => 'Unknown Track').top(:track_id, 10)
 
     @most_played_tracks = []
     most_played_ids.each do |id, count|

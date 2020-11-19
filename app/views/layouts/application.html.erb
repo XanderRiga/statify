@@ -14,11 +14,24 @@
   </head>
 
   <body>
-  <div class="section">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </div>
+    <div class="section">
+      <% if notice %>
+        <article class="message is-primary" style="width:30%;">
+          <div class="message-body is-primary">
+            <%= notice %>
+          </div>
+        </article>
+      <% end %>
+
+      <% if alert %>
+        <article class="message is-warning" style="width:30%;">
+          <div class="message-body">
+            <%= alert %>
+          </div>
+        </article>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 
   <footer>

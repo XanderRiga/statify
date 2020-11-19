@@ -11,7 +11,7 @@ class HomeController < ApplicationController
     return render 'home/index' unless @spotify_user
 
     @recently_played = @spotify_user.recently_played(limit: 10)
-    render :show
+    redirect_to landing_page_path
   end
 
   def show

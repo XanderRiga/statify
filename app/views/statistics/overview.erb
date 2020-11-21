@@ -54,30 +54,7 @@
 
       <br>
       <br>
-      <p class="title is-3">Top Artists by Month</p>
-
-      <div class="columns is-centered">
-        <% @top_artists_6_months.each do |hash| %>
-          <% hash.each do |month, top_artists| %>
-          <% next if top_artists == {} %>
-            <div class="column is-narrow has-text-centered">
-              <table class="table is-striped is-hoverable">
-                <thead>
-                <tr>
-                  <td><b><%= month %></b></td>
-                </tr>
-                </thead>
-                <tbody>
-                  <% top_artists.each do |artist, count| %>
-                    <% next if artist == '' || artist == 'Unknown' %>
-                    <tr><td><%= artist %></td></tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
+      <%= render 'statistics/top_artists_6_months' %>
     </div>
   </div>
 </div>

@@ -111,6 +111,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    imgkit (1.6.2)
     inline_svg (1.6.0)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
@@ -304,6 +305,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    wkhtmltoimage-binary (0.12.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.1.9)
@@ -321,6 +323,7 @@ DEPENDENCIES
   devise
   groupdate
   hightop
+  imgkit
   inline_svg
   jbuilder (~> 2.7)
   jquery-rails
@@ -345,6 +348,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
+  wkhtmltoimage-binary
 
 RUBY VERSION
    ruby 2.6.3p62

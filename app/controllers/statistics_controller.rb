@@ -39,4 +39,15 @@ class StatisticsController < ApplicationController
 
     render json: top_artists.first(10), status: 200
   end
+
+  def top_artists_by_month
+    @top_artists_6_months = Statistics::Artists.top_6_months(user_id: current_user.id).reverse
+
+    template = File.open('app/views/export/top_artists_by_month.html.erb', 'rb', &:read)
+    raw_html = ERB.new(template).result(binding)
+    kit = IMGKit.new(raw_html, :quality => 50)
+
+    # send_data img, :disposition => 'attachment', :filename=>"your_stats.jpg"
+    # send_data(kit.to_jpg, :type => "image/jpeg", :disposition => 'inline')
+  end
 end

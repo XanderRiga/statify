@@ -12,6 +12,9 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'hightop'
 
+gem 'imgkit'
+gem 'wkhtmltoimage-binary'
+
 gem 'devise'
 gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

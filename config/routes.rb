@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       post 'top_artists'
       get 'tracks'
       post 'top_tracks'
+      get 'top_artists_by_month'
     end
   end
 end

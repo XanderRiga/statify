@@ -33,3 +33,4 @@ yarn-debug.log*
 .envrc
 
 .idea/*
+.env
